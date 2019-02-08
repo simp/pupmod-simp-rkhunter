@@ -1,0 +1,14 @@
+rkhunter::dbdir: '/var/lib/rkhunter/db'
+rkhunter::disable_tests: 
+  - 'suspscan hidden_ports'
+  - 'deleted_files packet_cap_apps'
+  - 'apps ipc_shared_mem'
+  - 'fake_test number3'
+rkhunter::existwhitelist:
+  - '/fake/whitelist/path'
+  - '/usr/bin/POST'
+rkhunter::language: 'ch'
+rkhunter::missing_logfiles: 
+  - '/this/used/to/be/here.log'
+  - '/another/file/not/here.log'
+rkhunter::password_file: '/etc/fakepwdir'
