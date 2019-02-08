@@ -1,0 +1,270 @@
+###  KEY ###
+#al = add loop to make multiple entries based on array size
+#asl = add space-seperated list loop "
+#
+
+#al null
+<% Array(@allowdevfile).flatten.each do |adf| -%>
+ALLOWDEVFILE=                          <%= @allowdevfile  %>
+<% end -%>
+#al null
+<% Array(@allowhiddendir).flatten.each do |adf| -%>
+ALLOWHIDDENDIR=                        <%= @allowhiddendir  %>
+<% end -%>
+#al null
+<% Array(@allowhiddenfile).flatten.each do |adf| -%>
+ALLOWHIDDENFILE=                       <%= @allowhiddenfile  %>
+<% end -%>
+#al,asl null
+<% Array(@allowipcpid).flatten.each do |adf| -%>
+ALLOWIPCPID=                           <%= @allowipcpid  %>
+<% end -%>
+#al null
+<% Array(@allowipcproc).flatten.each do |adf| -%>
+ALLOWIPCPROC=                          <%= @adf  %>
+<% end -%>
+#al asl null
+<% Array(@allowipcuser).flatten.each do |aiu| -%>
+ALLOWIPCUSER=                          <%= @aiu  %>
+<% end -%>
+#al null
+<% Array(@allowprocdelfile).flatten.each do |apdf| -%>
+ALLOWPROCDELFILE=                      <%= @apdf  %>
+<% end -%>
+#al null
+<% Array(@allowproclisten).flatten.each do |apl| -%>
+ALLOWPROCLISTEN=                       <%= @apl  %>
+<% end -%>
+#al,asl null
+<% Array(@allowpromiscif).flatten.each do |ap| -%>
+ALLOWPROMISCIF=                        <%= @ap  %>
+<% end -%>
+#0 [0,1,2]
+ALLOW_SSH_PROT_V1=                     <%= @allow_ssh_prot_v1  %>
+#no [no,yes,unset]
+ALLOW_SSH_ROOT_USER=                   <%= @allow_ssh_root_user  %>
+#0 [0,1]
+ALLOW_SYSLOG_REMOTE_LOGGING=           <%= @allow_syslog_remote_logging  %>
+#0 [0,1]
+APPEND_LOG=                            <%= @append_log  %>
+#al,asl null
+<% Array(@app_whitelist).flatten.each do |appwl| -%>
+APP_WHITELIST=                         <%= @appwl  %>
+<% end -%>
+#al null
+<% Array(@attrwhitelist).flatten.each do |atwl| -%>
+ATTRWHITELIST=                         <%= @atwl  %>
+<% end -%>
+#0 [0,1]
+AUTO_X_DETECT=                         <%= @auto_x_detect  %>
+#al,asl default based on the root account PATH environment variable
+<% if @bindir -%>
+  <% Array(@bindir).flatten.each do |bnd| -%>
+BINDIR=                                <%= @bindir  %>
+  <% end -%>
+<% end -%>
+#0 [0,1]
+COLOR_SET2=                            <%= @color_set2  %>
+#0 [0,1]
+COPY_LOG_ON_ERROR=                     <%= @copy_log_on_error  %>
+# The installer program will set the default directory. If this default is
+# # subsequently commented out or removed, then the program will assume a
+# # default directory beneath the installation directory.
+#
+#### Should i keep this at all? ####
+<% if @dbdir -%>
+DBDIR=                                 <%= @dbdir  %>
+<% end -%>
+#al,asl NONE
+# # but there are some disabled by recommendation: suspscan hidden_ports hidden_procs deleted_files packet_cap_apps apps
+<% Array(@disable_tests).flatten.each do |dt| -%>
+DISABLE_TESTS=                         <%= @dt  %>
+<% end -%>
+#al,asl null
+<% Array(@empty_logfiles).flatten.each do |el| -%>
+EMPTY_LOGFILES=                        <%= @el  %>
+<% end -%>
+#al,asl ALL
+<% Array(@enable_tests).flatten.each do |et| -%>
+ENABLE_TESTS=                          <%= @et  %>
+<% end -%>
+#has no default [NONE,PERL,<user_specified>]
+EPOCH_DATE_CMD=                        <%= @epoch_date_cmd  %>
+#al null  -- (`rkhunter --propupd` must be run whenever these options are changed)
+<% Array(@exclude_user_fileprop_files_dirs).flatten.each do |euffd| -%>
+EXCLUDE_USER_FILEPROP_FILES_DIRS=      <%= @euffd  %>
+<% end -%>
+#al, null
+<% Array(@existwhitelist).flatten.each do |ewl| -%>
+EXISTWHITELIST=                        <%= @ewl  %>
+<% end -%>
+#0 [0,1]
+GLOBSTAR=                              <%= @globstar  %>
+#SHA256 -- (`rkhunter --propupd` must be run whenever these options are changed)
+HASH_CMD=                              <%= @hash_cmd  %>
+#1 (but rkhunter will default to 4 for BSD users if the HASH_CMD has not been set) [1,]
+HASH_FLD_IDX=                          <%= @hash_fld_idx  %>
+#al,asl null
+<% Array(@ignore_prelink_dep_err).flatten.each do |ipde| -%>
+IGNORE_PRELINK_DEP_ERR=                <%= @ipde  %>
+<% end -%>
+#0 [0,1]
+IMMUTABLE_SET=                         <%= @immutable_set  %>
+#al null
+<% Array(@immutwhitelist).flatten.each do |imwl| -%>
+IMMUTWHITELIST=                        <%= @imwl  %>
+<% end -%>
+#al,asl null
+<% Array(@inetd_allowed_svc).flatten.each do |inas| -%>
+INETD_ALLOWED_SVC=                     <%= @inas  %>
+<% end -%>
+#null
+INETD_CONF_PATH=                       <%= @inetd_conf_path  %>
+#set by rkhunter??
+<% if @installdir -%>
+INSTALLDIR=                            <%= @installdir  %>
+<% end -%>
+#1048576
+IPC_SEG_SIZE=                          <%= @ipc_seg_size  %>
+#en
+LANGUAGE=                              <%= @language  %>
+#set by rkhunter??
+LOGFILE=                               <%= @logfile  %>
+#mail -s "[rkhunter] Warnings found for ${HOST_NAME}"
+MAIL_CMD=                              <%= @mail_cmd  %>
+#0 [0,1,2]
+MIRRORS_MODE=                          <%= @mirrors_mode  %>
+#al,asl null
+<% Array(@missing_logfiles).flatten.each do |mil| -%>
+MISSING_LOGFILES=                      <%= @mil  %>
+<% end -%>
+#rkhunter will work this out, usually not needed to be set - has no default
+<% if @modules_dir -%>
+MODULES_DIR=                           <%= @modules_dir  %>
+<% end -%>
+#should be left unset, has no default
+OS_VERSION_FILE=                       <%= @os_version_file  %>
+#no default (will be worked out by rkhutner if left unset) (suggestion: /etc/shadow)
+PASSWORD_FILE=                         <%= @password_file  %>
+#0 [0,1]
+PHALANX2_DIRTEST=                      <%= @phalanx2_dirtest  %>
+#al null
+<% Array(@pkgmgr_no_vrfy).flatten.each do |pknv| -%>
+PKGMGR_NO_VRFY=                        <%= @pknv  %>
+<% end -%>
+#NONE (should be set conditionally based on OS? RPM)
+PKGMGR=                                <%= @pkgmgr  %>
+#al,asl null   valid: "[UDP|TCP][1,65535]"
+<% Array(@port_path_whitelist).flatten.each do |popwl| -%>
+PORT_PATH_WHITELIST=                   <%= @popwl  %>
+<% end -%>
+#al,asl null   valid: "[UDP|TCP][1,65535]"
+<% Array(@port_whitelist).flatten.each do |powl| -%>
+PORT_WHITELIST=                        <%= @powl  %>
+<% end -%>
+#al,asl null
+<% Array(@pwdless_accounts).flatten.each do |pwda| -%>
+PWDLESS_ACCOUNTS=                      <%= @pwda  %>
+<% end -%>
+#null
+READLINK_CMD=                          <%= @readlink_cmd  %>
+#1 [0,1]
+ROTATE_MIRRORS=                        <%= @rotate_mirrors  %>
+#al null
+<% Array(@rtkt_dir_whitelist).flatten.each do |rtdwl| -%>
+RTKT_DIR_WHITELIST=                    <%= @rtdwl %>
+<% end -%>
+#al null (string or string: or string:string)
+<% Array(@rtkt_file_whitelist).flatten.each do |rtfwl| -%>
+RTKT_FILE_WHITELIST=                   <%= @rtfwl  %>
+<% end -%>
+#THOROUGH [THOROUGH,LAZY]
+SCAN_MODE_DEV=                         <%= @scan_mode_dev  %>
+#set by rkhunter??
+<% if @scriptdir -%>
+SCRIPTDIR=                             <%= @scriptdir  %>
+<% end -%>
+#al null
+<% Array(@scriptwhitelist).flatten.each do |scwl| -%>
+SCRIPTWHITELIST=                       <%= @scwl  %>
+<% end -%>
+#al,asl null
+<% Array(@shared_lib_whitelist).flatten.each do |shlwl| -%>
+SHARED_LIB_WHITELIST=                  <%= @shlwl  %>
+<% end -%>
+#0 [0,1]
+SKIP_INODE_CHECK=                      <%= @skip_inode_check  %>
+#no default, but rkhunter works it out on its own
+<% if @ssh_config_dir -%>
+SSH_CONFIG_DIR=                        <%= @ssh_config_dir  %>
+<% end -%>
+#al,asl no default
+<% if @startup_paths %>
+  <% Array(@startup_paths).flatten.each do |stpa| -%>
+STARTUP_PATHS=                         <%= @stpa  %>
+  <% end -%>
+<% end -%>
+#null
+STAT_CMD=                              <%= @stat_cmd  %>
+#al,asl (/tmp /var/tmp)
+<% Array(@suspscan_dirs).flatten.each do |sudi| -%>
+SUSPSCAN_DIRS=                         <%= @sudi  %>
+<% end -%>
+#1024000
+SUSPSCAN_MAXSIZE=                      <%= @suspscan_maxsize  %>
+#/dev/shm
+SUSPSCAN_TEMP=                         <%= @suspscan_temp  %>
+#200
+SUSPSCAN_THRESH=                       <%= @suspscan_thresh  %>
+#al null
+<% Array(@suspscan_whitelist).flatten.each do |suwl| -%>
+SUSPSCAN_WHITELIST=                    <%= @suwl  %>
+<% end -%>
+#al,asl no default (will be worked out by rkhunter if unset)
+<% if @syslog_config_file -%>
+  <% Array(@syslog_config_file).flatten.each do |sycf| -%>
+SYSLOG_CONFIG_FILE=                    <%= @sycf  %>
+  <% end -%>
+<% end -%>
+#set by rkhunter??
+TMPDIR=                                <%= @tmpdir  %>
+#al,asl null (do not need to specify 'root' as it is automatically whitelisted)
+<% Array(@uid0_accounts).flatten.each do |uia| -%>
+UID0_ACCOUNTS=                         <%= @uia  %>
+<% end -%>
+#al null
+<% Array(@update_lang).flatten.each do |upla| -%>
+UPDATE_LANG=                           <%= @upla  %>
+<% end -%>
+#1 [0,1]
+UPDATE_MIRRORS=                        <%= @update_mirrors  %>
+#0 [0,1]
+UPDT_ON_OS_CHANGE=                     <%= @updt_on_os_change  %>
+#0 [0,1]
+USE_LOCKING=                           <%= @use_locking  %>
+#al null  -- (`rkhunter --propupd` must be run whenever these options are changed)
+<% Array(@user_fileprop_files_dirs).flatten.each do |usffd| -%>
+USER_FILEPROP_FILES_DIRS=              <%= @usffd  %>
+<% end -%>
+#0 [0,1]
+USE_SUNSUM=                            <%= @use_sunsum  %>
+#default is NONE (they have a recommend? as authpriv.notice)
+USE_SYSLOG=                            <%= @use_syslog  %>
+#default 1 [0,1]
+WARN_ON_OS_CHANGE=                     <%= @warn_on_os_change  %>
+#has no default "", but rkhunter does auto select a command
+<% if @web_cmd -%>
+WEB_CMD=                               <%= @web_cmd  %>
+<% end %>
+#0 [0,1]
+WHITELISTED_IS_WHITE=                  <%= @whitelisted_is_white  %>
+#al, null
+<% Array(@writewhitelist).flatten.each do |wrwl| -%>
+WRITEWHITELIST=                        <%= @wrwl  %>
+<% end -%>
+#al,asl null
+<% Array(@xinetd_allowed_svc).flatten.each do |xias| -%>
+XINETD_ALLOWED_SVC=                    <%= @xias  %>
+<% end -%>
+#null
+XINETD_CONF_PATH=                      <%= @xinetd_conf_path  %>
