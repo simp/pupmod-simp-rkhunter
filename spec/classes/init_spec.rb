@@ -36,7 +36,6 @@ describe 'rkhunter' do
             )
           }
         end
-
       end
     end
   end
