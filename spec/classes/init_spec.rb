@@ -14,7 +14,15 @@ describe 'rkhunter' do
         end
 
         context 'with hiera override parameters' do
-          let(:data) { 'rkhunter_with_overrides' }
+          let(:params) {{
+            :dbdir            => '/var/lib/rkhunter/db',
+            :disable_tests    => ['suspscan hidden_ports','deleted_files packet_cap_apps',
+              'apps ipc_shared_mem','fake_test number3'],
+            :existwhitelist   => ['/fake/whitelist/path', '/usr/bin/POST'],
+            :language         => 'ch',
+            :missing_logfiles => ['/this/used/to/be/here.log','/another/file/not/here.log'],
+            :password_file    => '/etc/fakepwdir',
+          }}
           it { is_expected.to compile.with_all_deps }
           # make sure interpolation of hieradata in modules's data/ is working
           it { is_expected.to contain_class('rkhunter').with(
@@ -28,6 +36,7 @@ describe 'rkhunter' do
             )
           }
         end
+
       end
     end
   end
