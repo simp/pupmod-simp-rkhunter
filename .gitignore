@@ -5,7 +5,6 @@ manifests/t
 manifests/g
 spec/spec_helper.rb.backup
 spec/spec_helper.rb.template
-spec/spec_helper_acceptance.rb
 backup.tar
 Gemfile.lock
 t
