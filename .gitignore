@@ -1,14 +1,2 @@
-t.tar
-extra_todo.tar
-manifests/tmp
-manifests/t
-manifests/g
-spec/spec_helper.rb.backup
-spec/spec_helper.rb.template
-backup.tar
 Gemfile.lock
-t
-templates/bk
-templates/notes.rkhunter-conf.erb
-templates/rkhunter.conf.erb.todo
-templates/vars
+dist/tmp/pupmod-simp-rkhunter.spec
