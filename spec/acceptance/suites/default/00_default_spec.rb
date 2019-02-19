@@ -1,11 +1,11 @@
 require 'spec_helper_acceptance'
 
-test_name '<%= metadata.name %> class'
+test_name 'rkhunter class'
 
-describe '<%= metadata.name %> class' do
+describe 'rkhunter class' do
   let(:manifest) {
     <<-EOS
-      class { '<%= metadata.name %>': }
+      class { 'rkhunter': }
     EOS
   }
 
@@ -19,14 +19,19 @@ describe '<%= metadata.name %> class' do
       apply_manifest(manifest, :catch_changes => true)
     end
 
-
-    describe package('<%= metadata.name %>') do
+    describe package('unhide') do
       it { is_expected.to be_installed }
     end
 
-    describe service('<%= metadata.name %>') do
+    describe package('rkhunter') do
+      it { is_expected.to be_installed }
+    end
+
+=begin
+    describe service('rkhunter') do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end
+=end
   end
 end
