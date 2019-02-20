@@ -28,7 +28,9 @@ describe 'rkhunter class' do
     end
 
     it 'should create the conf file' do
-      on(host, 'ls /etc/rkhunter.conf')
+      apply_manifest(manifest, :catch_changes => true)
+      fcheck = on(host, 'ls /etc/rkhunter.conf').stdout
+      expect(fcheck).to eq '/etc/rkhunter.conf'
     end
 
     it 'should generate the database' do
