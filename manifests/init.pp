@@ -49,7 +49,7 @@ class rkhunter (
   Integer[0,2]                $allow_ssh_prot_v1                 =  0,
   Enum['no','yes','unset']    $allow_ssh_root_user               =  'no',
   Integer[0,1]                $allow_syslog_remote_logging       =  0,
-  Integer[0,1]                $append_log                        =  1,
+  Integer[0,1]                $append_log                        =  0,
   Optional[Array[String[1]]]  $app_whitelist                     =  undef,
   Optional[Array[String[1]]]  $attrwhitelist                     =  undef,
   Integer[0,1]                $auto_x_detect                     =  0,

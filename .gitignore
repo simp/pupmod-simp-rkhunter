@@ -1,3 +1,6 @@
 Gemfile.lock
 dist/tmp/pupmod-simp-rkhunter.spec
 spec/fixtures
+log
+dist
+junit

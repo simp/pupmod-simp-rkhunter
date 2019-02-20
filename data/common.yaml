@@ -3,6 +3,10 @@ rkhunter::allowhiddenfile:
   - '/usr/lib*/hmaccalc/sha512hmac.hmac'
   - '/usr/sbin/.ispec.hmac'
   - '/usr/sbin/.sshd.hmac'
+  - '/etc/.updated'
+  - '/usr/share/man/man1/..1.gz'
+  - '/usr/share/man/man5/.k5login.5.g'
+  - '/usr/share/man/man5/.k5identity.5.gz'
 rkhunter::dbdir: '/var/lib/rkhunter/db'
 rkhunter::disable_tests: 
   - 'suspscan hidden_ports deleted_files packet_cap_apps apps ipc_shared_mem'

@@ -27,6 +27,20 @@ describe 'rkhunter class' do
       it { is_expected.to be_installed }
     end
 
+    it 'should create the conf file' do
+      on(host, 'ls /etc/rkhunter.conf')
+    end
+
+    it 'should generate the database' do
+      on(host, 'ls /var/lib/rkhunter/db/rkhunter.dat')
+    end
+
+    it 'should generate a valid report and log when problems are found' do
+      on(host, 'touch /bin/.login')
+      on(host, 'rkhunter --check --skip-keypress --quiet', :acceptable_exit_codes => 1)
+
+      on(host, "grep 'Warning: Found login backdoor file: /bin/.login' /var/log/rkhunter/rkhunter.log")
+    end
 =begin
     describe service('rkhunter') do
       it { is_expected.to be_enabled }
