@@ -7,7 +7,7 @@ group :test do
   gem 'puppet', ENV.fetch('PUPPET_VERSION',  '~> 5.5')
   gem 'rspec'
   gem 'rspec-puppet'
-  gem 'hiera'
+  #gem 'hiera'
   gem 'hiera-puppet-helper'
   gem 'puppetlabs_spec_helper'
   gem 'metadata-json-lint'
@@ -15,7 +15,7 @@ group :test do
   gem 'puppet-lint-empty_string-check',   :require => false
   gem 'puppet-lint-trailing_comma-check', :require => false
   gem 'simp-rspec-puppet-facts', ENV.fetch('SIMP_RSPEC_PUPPET_FACTS_VERSION', '~> 2.2')
-  gem 'simp-rake-helpers', ENV.fetch('SIMP_RAKE_HELPERS_VERSION', '~> 5.6')
+  gem 'simp-rake-helpers', ENV.fetch('SIMP_RAKE_HELPERS_VERSION', ['>= 5.7', '< 6.0'])
 end
 
 group :development do
@@ -27,5 +27,5 @@ end
 group :system_tests do
   gem 'beaker'
   gem 'beaker-rspec'
-  gem 'simp-beaker-helpers', ENV.fetch('SIMP_BEAKER_HELPERS_VERSION', '~> 1.12')
+  gem 'simp-beaker-helpers', ENV.fetch('SIMP_BEAKER_HELPERS_VERSION', '~> 1.13')
 end
