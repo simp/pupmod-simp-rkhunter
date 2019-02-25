@@ -1,4 +1,5 @@
 Gemfile.lock
+CHANGELOG.md
 dist/tmp/pupmod-simp-rkhunter.spec
 spec/fixtures
 log
