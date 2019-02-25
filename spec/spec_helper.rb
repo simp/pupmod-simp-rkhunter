@@ -23,7 +23,6 @@ default_hiera_config =<<-EOM
   :datadir: "stub"
 :hierarchy:
   - "%{custom_hiera}"
-  - "%{spec_title}"
   - "%{module_name}"
   - "default"
 EOM
@@ -123,6 +122,11 @@ RSpec.configure do |c|
     Puppet[:environmentpath] = @spec_global_env_temp
     Puppet[:user] = Etc.getpwuid(Process.uid).name
     Puppet[:group] = Etc.getgrgid(Process.gid).name
+    if ENV.fetch('DEBUG','no') == 'yes'
+      Puppet.debug=true
+      Puppet::Util::Log.level = :debug
+      Puppet::Util::Log.newdestination(:console)
+    end
 
     # sanitize hieradata
     if defined?(hieradata)

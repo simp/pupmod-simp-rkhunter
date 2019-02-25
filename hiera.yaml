@@ -5,9 +5,6 @@ defaults:
   data_hash: 'yaml_data'
 
 hierarchy:
-  - name: 'Operating system major version'
-    path: 'os/%{facts.os.family}/%{facts.os.release.major}.yaml'
-
   - name: 'Operating system family'
     path: 'os/%{facts.os.family}.yaml'
 
