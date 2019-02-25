@@ -1,0 +1,8 @@
+Gemfile.lock
+CHANGELOG.md
+dist/tmp/pupmod-simp-rkhunter.spec
+spec/fixtures
+spec/acceptance/suites/default/nodesets
+log
+dist
+junit

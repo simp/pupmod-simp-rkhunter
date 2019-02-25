@@ -1,0 +1,28 @@
+rkhunter::allowhiddenfile:
+  - '/usr/lib*/hmaccalc/sha384hmac.hmac'
+  - '/usr/lib*/hmaccalc/sha512hmac.hmac'
+  - '/usr/sbin/.ispec.hmac'
+  - '/usr/sbin/.sshd.hmac'
+  - '/etc/.updated'
+  - '/usr/share/man/man1/..1.gz'
+  - '/usr/share/man/man5/.k5login.5.gz'
+  - '/usr/share/man/man5/.k5identity.5.gz'
+rkhunter::dbdir: '/var/lib/rkhunter/db'
+rkhunter::disable_tests: 
+  - 'suspscan hidden_ports deleted_files packet_cap_apps apps ipc_shared_mem'
+rkhunter::existwhitelist:
+  - '/bin/ad'
+  - '/usr/bin/GET'
+  - '/usr/bin/whatis'
+rkhunter::installdir: '/usr'
+rkhunter::password_file: '/etc/shadow'
+rkhunter::scriptdir: '/usr/share/rkhunter/scripts'
+rkhunter::scriptwhitelist:
+  - '/sbin/ifdown'
+  - '/sbin/ifup'
+  - '/usr/bin/GET'
+  - '/usr/bin/groups'
+  - '/usr/bin/ldd'
+  - '/usr/bin/whatis'
+rkhunter::ssh_config_dir: '/etc/ssh'
+rkhunter::tmpdir: '/var/lib/rkhunter'
