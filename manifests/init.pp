@@ -128,7 +128,7 @@ class rkhunter (
   }
 
   package { 'rkhunter':
-    ensure => $package_ensure,
+    ensure  => $package_ensure,
     require => Package['unhide'],
   }
 
@@ -153,7 +153,7 @@ class rkhunter (
       require  => [ Package['rkhunter'], Package['unhide'], File[ $rkhunter_conf_file ] ],
     }
   }
- 
+
   cron { 'rkhunter':
     command  => 'if test -f /var/lib/rkhunter/db/rkhunter.dat; then rkhunter --check --skip-keypress --quiet; else rkhunter --check --skip-keypress --quiet --propupd; fi',
     minute   => $minute,
