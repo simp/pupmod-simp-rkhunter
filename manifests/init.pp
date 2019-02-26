@@ -76,7 +76,7 @@ class rkhunter (
   String[1]                   $language                          =  'en',
   String[1]                   $logfile                           =  '/var/log/rkhunter/rkhunter.log',
   Optional[String[1]]         $mail_on_warning                   =  undef,
-  String[1]                   $mail_cmd                          =  'mail -s "[rkhunter] Warnings found for ${HOST_NAME}"', # lint:ignore:single_quote_string_with_variable
+  String[1]                   $mail_cmd                          =  'mail -s "[rkhunter] Warnings found for ${HOST_NAME}"', # lint:ignore:single_quote_string_with_variables
   Integer[0,2]                $mirrors_mode                      =  0,
   Optional[Array[String[1]]]  $missing_logfiles                  =  undef,
   Optional[String[1]]         $modules_dir                       =  undef,
