@@ -1,3 +1,5 @@
+* Mon Feb 26 2019 SIMP Team <simp-project.com> - 0.0.4
+- Fixed tests and linter errors.
 * Mon Feb 25 2019 SIMP Team <simp-project.com> - 0.0.3
 - This is the initial code for a `pupmod-simp-rkhunter` module, which 
   installs and configures rkhunter and unhide.
