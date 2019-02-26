@@ -76,7 +76,7 @@ class rkhunter (
   String[1]                   $language                          =  'en',
   String[1]                   $logfile                           =  '/var/log/rkhunter/rkhunter.log',
   Optional[String[1]]         $mail_on_warning                   =  undef,
-  String[1]                   $mail_cmd                          =  'mail -s "[rkhunter] Warnings found for ${HOST_NAME}"',
+  String[1]                   $mail_cmd                          =  'mail -s "[rkhunter] Warnings found for ${HOST_NAME}"', # lint:ignore:single_quote_string_with_variable
   Integer[0,2]                $mirrors_mode                      =  0,
   Optional[Array[String[1]]]  $missing_logfiles                  =  undef,
   Optional[String[1]]         $modules_dir                       =  undef,
@@ -120,16 +120,16 @@ class rkhunter (
   Integer[0,1]                $whitelisted_is_white              =  0,
   Optional[Array[String[1]]]  $writewhitelist                    =  undef,
   Optional[Array[String[1]]]  $xinetd_allowed_svc                =  undef,
-  Optional[String[1]]         $xinetd_conf_path                  =  undef,
+  Optional[String[1]]         $xinetd_conf_path                  =  undef
 ) {
 
   package { 'unhide':
-    ensure => $package_ensure,
+    ensure => $package_ensure
   }
 
   package { 'rkhunter':
     ensure  => $package_ensure,
-    require => Package['unhide'],
+    require => Package['unhide']
   }
 
   file { $rkhunter_conf_file:
@@ -139,7 +139,7 @@ class rkhunter (
     mode    => '0640',
     path    => '/etc/rkhunter.conf',
     content => template($rkhunter_conf_file_template),
-    require => Package['rkhunter'],
+    require => Package['rkhunter']
   }
 
   if $check_for_updates {
@@ -150,7 +150,7 @@ class rkhunter (
       month    => $month_upd,
       monthday => $monthday_upd,
       weekday  => $weekday_upd,
-      require  => [ Package['rkhunter'], Package['unhide'], File[ $rkhunter_conf_file ] ],
+      require  => [ Package['rkhunter'], Package['unhide'], File[ $rkhunter_conf_file ] ]
     }
   }
 
@@ -161,6 +161,6 @@ class rkhunter (
     month    => $month,
     monthday => $monthday,
     weekday  => $weekday,
-    require  => [ Package['rkhunter'], Package['unhide'], File[ $rkhunter_conf_file ] ],
+    require  => [ Package['rkhunter'], Package['unhide'], File[ $rkhunter_conf_file ] ]
   }
 }
