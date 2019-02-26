@@ -12,7 +12,6 @@ HOSTS:
         mirrorlist: 'https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch'
         gpgkeys:
           - https://getfedora.org/static/352C64E5.txt
-
 CONFIG:
   log_level: verbose
   type: aio
