@@ -33,8 +33,8 @@ class rkhunter (
   String[1]         $month                           = '*',
   String[1]         $weekday                         = '*',
   String[1]         $package_ensure                  = 'latest',
-  String[1]]  $rkhunter_conf_file                    = '/etc/rkhunter.conf',
-  String[1]]  $rkhunter_conf_file_template           = 'rkhunter/rkhunter-conf.erb',
+  String[1]  $rkhunter_conf_file                    = '/etc/rkhunter.conf',
+  String[1]  $rkhunter_conf_file_template           = 'rkhunter/rkhunter-conf.erb',
   Optional[Boolean]    $check_for_updates            = undef,
 ############start of rkhunter.conf options
   Optional[Array[String[1]]]  $allowdevfile                      = undef,
