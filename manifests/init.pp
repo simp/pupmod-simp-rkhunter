@@ -56,7 +56,7 @@ class rkhunter (
   Optional[Array[String[1]]]  $bindir                            = undef,
   Integer[0,1]                $color_set2                        = 0,
   Integer[0,1]                $copy_log_on_error                 = 0,
-  Optional[String[1]]         $dbdir                             = undef,
+  String[1]                   $dbdir                             = '/var/lib/rkhunter/db',
   Optional[Array[String[1]]]  $disable_tests                     = undef,
   Optional[Array[String[1]]]  $empty_logfiles                    = undef,
   Array[String[1]]  $enable_tests                                = ['ALL'],
@@ -71,9 +71,11 @@ class rkhunter (
   Optional[Array[String[1]]]  $immutwhitelist                    = undef,
   Optional[Array[String[1]]]  $inetd_allowed_svc                 = undef,
   Optional[String[1]]         $inetd_conf_path                   = undef,
-  Optional[String[1]]         $installdir                        = undef,
+  String[1]                   $installdir                        = '/usr',
   Integer[1]                  $ipc_seg_size                      = 1048576,
   String[1]                   $language                          = 'en',
+  Integer[1]                  $lock_timeout                      = 300,
+  String[1]                   $lockdir                           = '/var/run/lock',
   String[1]                   $logfile                           = '/var/log/rkhunter/rkhunter.log',
   Optional[String[1]]         $mail_on_warning                   = undef,
   String[1]                   $mail_cmd                          = 'mail -s "[rkhunter] Warnings found for ${HOST_NAME}"', # lint:ignore:single_quote_string_with_variables
@@ -81,7 +83,7 @@ class rkhunter (
   Optional[Array[String[1]]]  $missing_logfiles                  = undef,
   Optional[String[1]]         $modules_dir                       = undef,
   Optional[String[1]]         $os_version_file                   = undef,
-  Optional[String[1]]         $password_file                     = undef, #should keep? suggestion: /etc/shadow
+  String[1]                   $password_file                     = '/etc/shadow',
   Integer[0,1]                $phalanx2_dirtest                  = 0,
   Optional[Array[String[1]]]  $pkgmgr_no_vrfy                    = undef,
   String[1]                   $pkgmgr                            = 'RPM',
@@ -93,21 +95,27 @@ class rkhunter (
   Optional[Array[String[1]]]  $rtkt_dir_whitelist                = undef,
   Optional[Array[String[1]]]  $rtkt_file_whitelist               = undef,
   Enum['THOROUGH','LAZY']     $scan_mode_dev                     = 'THOROUGH',
-  Optional[String[1]]         $scriptdir                         = undef,
+  Optional[Enum['THOROUGH']]  $scanrootkitmode                   = undef,
+  String[1]                   $scriptdir                         = '/usr/share/rkhunter/scripts',
   Optional[Array[String[1]]]  $scriptwhitelist                   = undef,
   Optional[Array[String[1]]]  $shared_lib_whitelist              = undef,
+  Integer[0,1]                $show_lock_msgs                    = 1,
+  Integer[0,3]                $show_summary_time                 = 3,
+  Integer[0,1]                $show_summary_warning_number       = 0,
   Integer[0,1]                $skip_inode_check                  = 0,
-  Optional[String[1]]         $ssh_config_dir                    = undef,
+  String[1]                   $ssh_config_dir                    = '/etc/ssh',
   Optional[Array[String[1]]]  $startup_paths                     = undef, #suggestion: /etc/rc.d /etc/rc.local ??
   Optional[String[1]]         $stat_cmd                          = undef,
   Optional[Array[String[1]]]  $suspscan_dirs                     = undef,
-  Integer                     $suspscan_maxsize                  = 1024000,
+  Integer[0]                  $suspscan_maxsize                  = 1024000,
   String[1]                   $suspscan_temp                     = '/dev/shm',
-  Integer                     $suspscan_thresh                   = 200,
+  Integer[0]                  $suspscan_thresh                   = 200,
   Optional[Array[String[1]]]  $suspscan_whitelist                = undef,
   Optional[Array[String[1]]]  $syslog_config_file                = undef,
-  Optional[String[1]]         $tmpdir                            = undef,
+  String[1]                   $tmpdir                            = '/var/lib/rkhunter',
   Optional[Array[String[1]]]  $uid0_accounts                     = undef,
+  Array[String[1]]            $unhide_tests                      = ['sys'],
+  Array[String]             $unhidetcp_opts                    = [''],
   Optional[Array[String[1]]]  $update_lang                       = undef,
   Integer[0,1]                $update_mirrors                    = 1,
   Integer[0,1]                $updt_on_os_change                 = 0,
@@ -123,6 +131,8 @@ class rkhunter (
   Optional[String[1]]         $xinetd_conf_path                  = undef
 ) {
 
+  # Some tests require single-purpose tools, if rkhunter has
+  # them then it will use them. Unhide is one such tool. 
   package { 'unhide':
     ensure => $package_ensure
   }

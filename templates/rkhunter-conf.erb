@@ -43,9 +43,7 @@ BINDIR=<%= bnd  %>
 <% end -%>
 COLOR_SET2=<%= @color_set2  %>
 COPY_LOG_ON_ERROR=<%= @copy_log_on_error  %>
-<% if @dbdir -%>
 DBDIR=<%= @dbdir  %>
-<% end -%>
 <% Array(@disable_tests).flatten.each do |dt| -%>
 DISABLE_TESTS=<%= dt  %>
 <% end -%>
@@ -80,11 +78,13 @@ INETD_ALLOWED_SVC=<%= inas  %>
 <% if @inetd_conf_path -%>
 INETD_CONF_PATH=<%= @inetd_conf_path  %>
 <% end -%>
-<% if @installdir -%>
 INSTALLDIR=<%= @installdir  %>
-<% end -%>
 IPC_SEG_SIZE=<%= @ipc_seg_size  %>
 LANGUAGE=<%= @language  %>
+LOCK_TIMEOUT=<% @lock_timeout  %>
+<% if @lockdir -%>
+LOCKDIR=<% @lockdir  %>
+<% end -%>
 LOGFILE=<%= @logfile  %>
 <% if @mail_on_warning -%> 
 MAIL-ON-WARNING=@mail_on_warning
@@ -124,19 +124,21 @@ RTKT_DIR_WHITELIST=<%= rtdwl %>
 RTKT_FILE_WHITELIST=<%= rtfwl  %>
 <% end -%>
 SCAN_MODE_DEV=<%= @scan_mode_dev  %>
-<% if @scriptdir -%>
-SCRIPTDIR=<%= @scriptdir  %>
+<% if @scanrootkitmode -%>
+SCANROOTKITMODE=<%= @scanrootkitmode  %>
 <% end -%>
+SCRIPTDIR=<%= @scriptdir  %>
 <% Array(@scriptwhitelist).flatten.each do |scwl| -%>
 SCRIPTWHITELIST=<%= scwl  %>
 <% end -%>
 <% Array(@shared_lib_whitelist).flatten.each do |shlwl| -%>
 SHARED_LIB_WHITELIST=<%= shlwl  %>
 <% end -%>
+SHOW_LOCK_MSGS=<%= @show_lock_msgs  %>
+SHOW_SUMMARY_TIME=<%= @show_summary_time  %>
+SHOW_SUMMARY_WARNINGS_NUMBER=<%= @show_summary_warning_number  %>
 SKIP_INODE_CHECK=<%= @skip_inode_check  %>
-<% if @ssh_config_dir -%>
 SSH_CONFIG_DIR=<%= @ssh_config_dir  %>
-<% end -%>
 <% if @startup_paths %>
   <% Array(@startup_paths).flatten.each do |stpa| -%>
 STARTUP_PATHS=<%= stpa  %>
@@ -160,8 +162,16 @@ SYSLOG_CONFIG_FILE=<%= sycf  %>
   <% end -%>
 <% end -%>
 TMPDIR=<%= @tmpdir  %>
-<% Array(@uid0_accounts).flatten.each do |uia| -%>
+<% if @uid0_accounts -%>
+  <% Array(@uid0_accounts).flatten.each do |uia| -%>
 UID0_ACCOUNTS=<%= uia  %>
+  <% end -%>
+<% end -%>
+<% Array(@unhide_tests).flatten.each do |unht| -%>
+UNHIDE_TESTS=<%= unht  %>
+<% end -%>
+<% Array(@unhidetcp_opts).flatten.each do |unhopts| -%>
+UNHIDETCP_OPTS=<%= unhopts  %>
 <% end -%>
 <% Array(@update_lang).flatten.each do |upla| -%>
 UPDATE_LANG=<%= upla  %>
