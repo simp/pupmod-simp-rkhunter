@@ -33,86 +33,113 @@ class rkhunter (
   String[1]                   $month                             = '*',
   String[1]                   $weekday                           = '*',
   String[1]                   $package_ensure                    = 'latest',
-  String[1]                   $rkhunter_conf_file                = '/etc/rkhunter.conf',
-  String[1]                   $rkhunter_conf_file_template       = 'rkhunter/rkhunter-conf.erb',
+  Stdlib::Absolutepath        $rkhunter_conf_file                = '/etc/rkhunter.conf',
+  Stdlib::Absolutepath        $rkhunter_conf_file_template       = 'rkhunter/rkhunter-conf.erb',
   Optional[Boolean]           $check_for_updates                 = undef,
 ############start of rkhunter.conf options
-  Optional[Array[String[1]]]  $allowdevfile                      = undef,
-  Optional[Array[String[1]]]  $allowhiddendir                    = undef,
-  Optional[Array[String[1]]]  $allowhiddenfile                   = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $allowdevfile                      = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $allowhiddendir                    = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $allowhiddenfile                   = undef,
   Optional[Array[String[1]]]  $allowipcpid                       = undef,
-  Optional[Array[String[1]]]  $allowipcproc                      = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $allowipcproc                      = undef,
   Optional[Array[String[1]]]  $allowipcuser                      = undef,
-  Optional[Array[String[1]]]  $allowprocdelfile                  = undef,
-  Optional[Array[String[1]]]  $allowproclisten                   = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $allowprocdelfile                  = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $allowproclisten                   = undef,
   Optional[Array[String[1]]]  $allowpromiscif                    = undef,
   Integer[0,2]                $allow_ssh_prot_v1                 = 0,
   Enum['no','yes','unset']    $allow_ssh_root_user               = 'no',
   Integer[0,1]                $allow_syslog_remote_logging       = 0,
   Integer[0,1]                $append_log                        = 0,
   Optional[Array[String[1]]]  $app_whitelist                     = undef,
-  Optional[Array[String[1]]]  $attrwhitelist                     = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $attrwhitelist                     = undef,
   Integer[0,1]                $auto_x_detect                     = 0,
-  Optional[Array[String[1]]]  $bindir                            = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $bindir                            = undef,
   Integer[0,1]                $color_set2                        = 0,
   Integer[0,1]                $copy_log_on_error                 = 0,
-  String[1]                   $dbdir                             = '/var/lib/rkhunter/db',
+  Stdlib::Absolutepath        $dbdir                             = '/var/lib/rkhunter/db',
   Optional[Array[String[1]]]  $disable_tests                     = undef,
-  Optional[Array[String[1]]]  $empty_logfiles                    = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $empty_logfiles                    = undef,
   Array[String[1]]            $enable_tests                      = ['ALL'],
   Optional[String[1]]         $epoch_date_cmd                    = undef,
-  Optional[Array[String[1]]]  $exclude_user_fileprop_files_dirs  = undef,
-  Optional[Array[String[1]]]  $existwhitelist                    = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $exclude_user_fileprop_files_dirs  = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $existwhitelist                    = undef,
   Integer[0,1]                $globstar                          = 0,
   String[1]                   $hash_cmd                          = 'SHA256',
   Integer[1]                  $hash_fld_idx                      = 1,
-  Optional[Array[String[1]]]  $ignore_prelink_dep_err            = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $ignore_prelink_dep_err            = undef,
   Integer[0,1]                $immutable_set                     = 0,
-  Optional[Array[String[1]]]  $immutwhitelist                    = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $immutwhitelist                    = undef,
   Optional[Array[String[1]]]  $inetd_allowed_svc                 = undef,
-  Optional[String[1]]         $inetd_conf_path                   = undef,
-  String[1]                   $installdir                        = '/usr',
+  Optional[Stdlib::Absolutepath]
+                              $inetd_conf_path                   = undef,
+  Stdlib::Absolutepath        $installdir                        = '/usr',
   Integer[1]                  $ipc_seg_size                      = 1048576,
   String[1]                   $language                          = 'en',
   Integer[1]                  $lock_timeout                      = 300,
-  String[1]                   $lockdir                           = '/var/run/lock',
-  String[1]                   $logfile                           = '/var/log/rkhunter/rkhunter.log',
+  Stdlib::Absolutepath        $lockdir                           = '/var/run/lock',
+  Stdlib::Absolutepath        $logfile                           = '/var/log/rkhunter/rkhunter.log',
   Optional[String[1]]         $mail_on_warning                   = undef,
   String[1]                   $mail_cmd                          = 'mail -s "[rkhunter] Warnings found for ${HOST_NAME}"', # lint:ignore:single_quote_string_with_variables
   Integer[0,2]                $mirrors_mode                      = 0,
-  Optional[Array[String[1]]]  $missing_logfiles                  = undef,
-  Optional[String[1]]         $modules_dir                       = undef,
-  Optional[String[1]]         $os_version_file                   = undef,
-  String[1]                   $password_file                     = '/etc/shadow',
+  Optional[Array[Stdlib::Absolutepath]]
+                              $missing_logfiles                  = undef,
+  Optional[Stdlib::Absolutepath]
+                              $modules_dir                       = undef,
+  Optional[Stdlib::Absolutepath]
+                              $os_version_file                   = undef,
+  Stdlib::Absolutepath        $password_file                     = '/etc/shadow',
   Integer[0,1]                $phalanx2_dirtest                  = 0,
-  Optional[Array[String[1]]]  $pkgmgr_no_vrfy                    = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $pkgmgr_no_vrfy                    = undef,
   String[1]                   $pkgmgr                            = 'RPM',
-  Optional[Array[String[1]]]  $port_path_whitelist               = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $port_path_whitelist               = undef,
   Optional[Array[String[1]]]  $port_whitelist                    = undef,
   Optional[Array[String[1]]]  $pwdless_accounts                  = undef,
   Optional[String[1]]         $readlink_cmd                      = undef,
   Integer[0,1]                $rotate_mirrors                    = 1,
-  Optional[Array[String[1]]]  $rtkt_dir_whitelist                = undef,
-  Optional[Array[String[1]]]  $rtkt_file_whitelist               = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $rtkt_dir_whitelist                = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $rtkt_file_whitelist               = undef,
   Enum['THOROUGH','LAZY']     $scan_mode_dev                     = 'THOROUGH',
   Optional[Enum['THOROUGH']]  $scanrootkitmode                   = undef,
-  String[1]                   $scriptdir                         = '/usr/share/rkhunter/scripts',
-  Optional[Array[String[1]]]  $scriptwhitelist                   = undef,
-  Optional[Array[String[1]]]  $shared_lib_whitelist              = undef,
+  Stdlib::Absolutepath        $scriptdir                         = '/usr/share/rkhunter/scripts',
+  Optional[Array[Stdlib::Absolutepath]]
+                              $scriptwhitelist                   = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $shared_lib_whitelist              = undef,
   Integer[0,1]                $show_lock_msgs                    = 1,
   Integer[0,3]                $show_summary_time                 = 3,
   Integer[0,1]                $show_summary_warning_number       = 0,
   Integer[0,1]                $skip_inode_check                  = 0,
-  String[1]                   $ssh_config_dir                    = '/etc/ssh',
-  Optional[Array[String[1]]]  $startup_paths                     = undef, #suggestion: /etc/rc.d /etc/rc.local ??
+  Stdlib::Absolutepath        $ssh_config_dir                    = '/etc/ssh',
+  Optional[Array[Stdlib::Absolutepath]]
+                              $startup_paths                     = undef, #suggestion: /etc/rc.d /etc/rc.local ??
   Optional[String[1]]         $stat_cmd                          = undef,
-  Optional[Array[String[1]]]  $suspscan_dirs                     = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $suspscan_dirs                     = undef,
   Integer[0]                  $suspscan_maxsize                  = 1024000,
-  String[1]                   $suspscan_temp                     = '/dev/shm',
+  Stdlib::Absolutepath        $suspscan_temp                     = '/dev/shm',
   Integer[0]                  $suspscan_thresh                   = 200,
-  Optional[Array[String[1]]]  $suspscan_whitelist                = undef,
-  Optional[Array[String[1]]]  $syslog_config_file                = undef,
-  String[1]                   $tmpdir                            = '/var/lib/rkhunter',
+  Optional[Array[Stdlib::Absolutepath]]
+                              $suspscan_whitelist                = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $syslog_config_file                = undef,
+  Stdlib::Absolutepath        $tmpdir                            = '/var/lib/rkhunter',
   Optional[Array[String[1]]]  $uid0_accounts                     = undef,
   Array[String[1]]            $unhide_tests                      = ['sys'],
   Array[String]               $unhidetcp_opts                    = [''],
@@ -120,15 +147,18 @@ class rkhunter (
   Integer[0,1]                $update_mirrors                    = 1,
   Integer[0,1]                $updt_on_os_change                 = 0,
   Integer[0,1]                $use_locking                       = 1,
-  Optional[Array[String[1]]]  $user_fileprop_files_dirs          = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $user_fileprop_files_dirs          = undef,
   Integer[0,1]                $use_sunsum                        = 0,
   String[1]                   $use_syslog                        = 'NONE', #recommend authpriv.notice??
   Integer[0,1]                $warn_on_os_change                 = 1,
   Optional[String[1]]         $web_cmd                           = undef, #shuold keep? rkhunter auto selects one
   Integer[0,1]                $whitelisted_is_white              = 0,
-  Optional[Array[String[1]]]  $writewhitelist                    = undef,
+  Optional[Array[Stdlib::Absolutepath]]
+                              $writewhitelist                    = undef,
   Optional[Array[String[1]]]  $xinetd_allowed_svc                = undef,
-  Optional[String[1]]         $xinetd_conf_path                  = undef
+  Optional[Stdlib::Absolutepath]
+                              $xinetd_conf_path                  = undef
 ) {
 
   # Some tests require single-purpose tools, if rkhunter has
