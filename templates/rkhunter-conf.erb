@@ -1,78 +1,78 @@
-<% Array(@allowdevfile).flatten.each do |adf| -%>
+<% Array(@allowdevfile).each do |adf| -%>
 ALLOWDEVFILE=<%= adf  %>
 <% end -%>
-<% Array(@allowhiddendir).flatten.each do |ahd| -%>
+<% Array(@allowhiddendir).each do |ahd| -%>
 ALLOWHIDDENDIR=<%= ahd  %>
 <% end -%>
-<% Array(@allowhiddenfile).flatten.each do |ahf| -%>
+<% Array(@allowhiddenfile).each do |ahf| -%>
 ALLOWHIDDENFILE=<%= ahf  %>
 <% end -%>
-<% Array(@allowipcpid).flatten.each do |aicpi| -%>
+<% Array(@allowipcpid).each do |aicpi| -%>
 ALLOWIPCPID=<%= aicpi  %>
 <% end -%>
-<% Array(@allowipcproc).flatten.each do |aicpr| -%>
+<% Array(@allowipcproc).each do |aicpr| -%>
 ALLOWIPCPROC=<%= aicpr  %>
 <% end -%>
-<% Array(@allowipcuser).flatten.each do |aiu| -%>
+<% Array(@allowipcuser).each do |aiu| -%>
 ALLOWIPCUSER=<%= aiu  %>
 <% end -%>
-<% Array(@allowprocdelfile).flatten.each do |apdf| -%>
+<% Array(@allowprocdelfile).each do |apdf| -%>
 ALLOWPROCDELFILE=<%= apdf  %>
 <% end -%>
-<% Array(@allowproclisten).flatten.each do |apl| -%>
+<% Array(@allowproclisten).each do |apl| -%>
 ALLOWPROCLISTEN=<%= apl  %>
 <% end -%>
-<% Array(@allowpromiscif).flatten.each do |ap| -%>
+<% Array(@allowpromiscif).each do |ap| -%>
 ALLOWPROMISCIF=<%= ap  %>
 <% end -%>
 ALLOW_SSH_PROT_V1=<%= @allow_ssh_prot_v1  %>
 ALLOW_SSH_ROOT_USER=<%= @allow_ssh_root_user  %>
 ALLOW_SYSLOG_REMOTE_LOGGING=<%= @allow_syslog_remote_logging  %>
 APPEND_LOG=<%= @append_log  %>
-<% Array(@app_whitelist).flatten.each do |appwl| -%>
+<% Array(@app_whitelist).each do |appwl| -%>
 APP_WHITELIST=<%= appwl  %>
 <% end -%>
-<% Array(@attrwhitelist).flatten.each do |atwl| -%>
+<% Array(@attrwhitelist).each do |atwl| -%>
 ATTRWHITELIST=<%= atwl  %>
 <% end -%>
 AUTO_X_DETECT=<%= @auto_x_detect  %>
 <% if @bindir -%>
-  <% Array(@bindir).flatten.each do |bnd| -%>
+  <% Array(@bindir).each do |bnd| -%>
 BINDIR=<%= bnd  %>
   <% end -%>
 <% end -%>
 COLOR_SET2=<%= @color_set2  %>
 COPY_LOG_ON_ERROR=<%= @copy_log_on_error  %>
 DBDIR=<%= @dbdir  %>
-<% Array(@disable_tests).flatten.each do |dt| -%>
+<% Array(@disable_tests).each do |dt| -%>
 DISABLE_TESTS=<%= dt  %>
 <% end -%>
-<% Array(@empty_logfiles).flatten.each do |el| -%>
+<% Array(@empty_logfiles).each do |el| -%>
 EMPTY_LOGFILES=<%= el  %>
 <% end -%>
-<% Array(@enable_tests).flatten.each do |et| -%>
+<% Array(@enable_tests).each do |et| -%>
 ENABLE_TESTS=<%= et  %>
 <% end -%>
 <% if @epoch_date_cmd -%>
 EPOCH_DATE_CMD=<%= @epoch_date_cmd  %>
 <% end -%>
-<% Array(@exclude_user_fileprop_files_dirs).flatten.each do |euffd| -%>
+<% Array(@exclude_user_fileprop_files_dirs).each do |euffd| -%>
 EXCLUDE_USER_FILEPROP_FILES_DIRS=<%= euffd  %>
 <% end -%>
-<% Array(@existwhitelist).flatten.each do |ewl| -%>
+<% Array(@existwhitelist).each do |ewl| -%>
 EXISTWHITELIST=<%= ewl  %>
 <% end -%>
 GLOBSTAR=<%= @globstar  %>
 HASH_CMD=<%= @hash_cmd  %>
 HASH_FLD_IDX=<%= @hash_fld_idx  %>
-<% Array(@ignore_prelink_dep_err).flatten.each do |ipde| -%>
+<% Array(@ignore_prelink_dep_err).each do |ipde| -%>
 IGNORE_PRELINK_DEP_ERR=<%= ipde  %>
 <% end -%>
 IMMUTABLE_SET=<%= @immutable_set  %>
-<% Array(@immutwhitelist).flatten.each do |imwl| -%>
+<% Array(@immutwhitelist).each do |imwl| -%>
 IMMUTWHITELIST=<%= imwl  %>
 <% end -%>
-<% Array(@inetd_allowed_svc).flatten.each do |inas| -%>
+<% Array(@inetd_allowed_svc).each do |inas| -%>
 INETD_ALLOWED_SVC=<%= inas  %>
 <% end -%>
 <% if @inetd_conf_path -%>
@@ -91,7 +91,7 @@ MAIL-ON-WARNING=@mail_on_warning
 MAIL_CMD=<%= @mail_cmd  %>
 <% end -%>
 MIRRORS_MODE=<%= @mirrors_mode  %>
-<% Array(@missing_logfiles).flatten.each do |mil| -%>
+<% Array(@missing_logfiles).each do |mil| -%>
 MISSING_LOGFILES=<%= mil  %>
 <% end -%>
 <% if @modules_dir -%>
@@ -100,27 +100,27 @@ MODULES_DIR=<%= @modules_dir  %>
 OS_VERSION_FILE=<%= @os_version_file  %>
 PASSWORD_FILE=<%= @password_file  %>
 PHALANX2_DIRTEST=<%= @phalanx2_dirtest  %>
-<% Array(@pkgmgr_no_vrfy).flatten.each do |pknv| -%>
+<% Array(@pkgmgr_no_vrfy).each do |pknv| -%>
 PKGMGR_NO_VRFY=<%= pknv  %>
 <% end -%>
 PKGMGR=<%= @pkgmgr  %>
-<% Array(@port_path_whitelist).flatten.each do |popwl| -%>
+<% Array(@port_path_whitelist).each do |popwl| -%>
 PORT_PATH_WHITELIST=<%= popwl  %>
 <% end -%>
-<% Array(@port_whitelist).flatten.each do |powl| -%>
+<% Array(@port_whitelist).each do |powl| -%>
 PORT_WHITELIST=<%= powl  %>
 <% end -%>
-<% Array(@pwdless_accounts).flatten.each do |pwda| -%>
+<% Array(@pwdless_accounts).each do |pwda| -%>
 PWDLESS_ACCOUNTS=<%= pwda  %>
 <% end -%>
 <% if @readlink_cmd -%>
 READLINK_CMD=<%= @readlink_cmd  %>
 <% end -%>
 ROTATE_MIRRORS=<%= @rotate_mirrors  %>
-<% Array(@rtkt_dir_whitelist).flatten.each do |rtdwl| -%>
+<% Array(@rtkt_dir_whitelist).each do |rtdwl| -%>
 RTKT_DIR_WHITELIST=<%= rtdwl %>
 <% end -%>
-<% Array(@rtkt_file_whitelist).flatten.each do |rtfwl| -%>
+<% Array(@rtkt_file_whitelist).each do |rtfwl| -%>
 RTKT_FILE_WHITELIST=<%= rtfwl  %>
 <% end -%>
 SCAN_MODE_DEV=<%= @scan_mode_dev  %>
@@ -128,10 +128,10 @@ SCAN_MODE_DEV=<%= @scan_mode_dev  %>
 SCANROOTKITMODE=<%= @scanrootkitmode  %>
 <% end -%>
 SCRIPTDIR=<%= @scriptdir  %>
-<% Array(@scriptwhitelist).flatten.each do |scwl| -%>
+<% Array(@scriptwhitelist).each do |scwl| -%>
 SCRIPTWHITELIST=<%= scwl  %>
 <% end -%>
-<% Array(@shared_lib_whitelist).flatten.each do |shlwl| -%>
+<% Array(@shared_lib_whitelist).each do |shlwl| -%>
 SHARED_LIB_WHITELIST=<%= shlwl  %>
 <% end -%>
 SHOW_LOCK_MSGS=<%= @show_lock_msgs  %>
@@ -140,46 +140,46 @@ SHOW_SUMMARY_WARNINGS_NUMBER=<%= @show_summary_warning_number  %>
 SKIP_INODE_CHECK=<%= @skip_inode_check  %>
 SSH_CONFIG_DIR=<%= @ssh_config_dir  %>
 <% if @startup_paths %>
-  <% Array(@startup_paths).flatten.each do |stpa| -%>
+  <% Array(@startup_paths).each do |stpa| -%>
 STARTUP_PATHS=<%= stpa  %>
   <% end -%>
 <% end -%>
 <% if @stat_cmd -%>
 STAT_CMD=<%= @stat_cmd  %>
 <% end -%>
-<% Array(@suspscan_dirs).flatten.each do |sudi| -%>
+<% Array(@suspscan_dirs).each do |sudi| -%>
 SUSPSCAN_DIRS=<%= sudi  %>
 <% end -%>
 SUSPSCAN_MAXSIZE=<%= @suspscan_maxsize  %>
 SUSPSCAN_TEMP=<%= @suspscan_temp  %>
 SUSPSCAN_THRESH=<%= @suspscan_thresh  %>
-<% Array(@suspscan_whitelist).flatten.each do |suwl| -%>
+<% Array(@suspscan_whitelist).each do |suwl| -%>
 SUSPSCAN_WHITELIST=<%= suwl  %>
 <% end -%>
 <% if @syslog_config_file -%>
-  <% Array(@syslog_config_file).flatten.each do |sycf| -%>
+  <% Array(@syslog_config_file).each do |sycf| -%>
 SYSLOG_CONFIG_FILE=<%= sycf  %>
   <% end -%>
 <% end -%>
 TMPDIR=<%= @tmpdir  %>
 <% if @uid0_accounts -%>
-  <% Array(@uid0_accounts).flatten.each do |uia| -%>
+  <% Array(@uid0_accounts).each do |uia| -%>
 UID0_ACCOUNTS=<%= uia  %>
   <% end -%>
 <% end -%>
-<% Array(@unhide_tests).flatten.each do |unht| -%>
+<% Array(@unhide_tests).each do |unht| -%>
 UNHIDE_TESTS=<%= unht  %>
 <% end -%>
-<% Array(@unhidetcp_opts).flatten.each do |unhopts| -%>
+<% Array(@unhidetcp_opts).each do |unhopts| -%>
 UNHIDETCP_OPTS=<%= unhopts  %>
 <% end -%>
-<% Array(@update_lang).flatten.each do |upla| -%>
+<% Array(@update_lang).each do |upla| -%>
 UPDATE_LANG=<%= upla  %>
 <% end -%>
 UPDATE_MIRRORS=<%= @update_mirrors  %>
 UPDT_ON_OS_CHANGE=<%= @updt_on_os_change  %>
 USE_LOCKING=<%= @use_locking  %>
-<% Array(@user_fileprop_files_dirs).flatten.each do |usffd| -%>
+<% Array(@user_fileprop_files_dirs).each do |usffd| -%>
 USER_FILEPROP_FILES_DIRS=<%= usffd  %>
 <% end -%>
 USE_SUNSUM=<%= @use_sunsum  %>
@@ -189,10 +189,10 @@ WARN_ON_OS_CHANGE=<%= @warn_on_os_change  %>
 WEB_CMD=<%= @web_cmd  %>
 <% end -%>
 WHITELISTED_IS_WHITE=<%= @whitelisted_is_white  %>
-<% Array(@writewhitelist).flatten.each do |wrwl| -%>
+<% Array(@writewhitelist).each do |wrwl| -%>
 WRITEWHITELIST=<%= wrwl  %>
 <% end -%>
-<% Array(@xinetd_allowed_svc).flatten.each do |xias| -%>
+<% Array(@xinetd_allowed_svc).each do |xias| -%>
 XINETD_ALLOWED_SVC=<%= xias  %>
 <% end -%>
 <% if @xinetd_conf_path %>
