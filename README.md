@@ -44,6 +44,8 @@ This module configures:
   * unhide package
   * rkhunter cron jobs
 
+Some tests require single-purpose tools, if rkhunter has them then it will use them. Unhide is one such tool. 
+
 ### Beginning with rkhunter
 
 To use this module with it's default settings, just instantiate it. The following example is in hiera:
@@ -75,7 +77,7 @@ SIMP Puppet modules are generally intended for use on Red Hat Enterprise Linux a
 
 ## Development
 
-Please read our [Contribution Guide] (http://simp.readthedocs.io/en/stable/contributors_guide/index.html)
+Please read our [Contribution Guide] (https://simp.readthedocs.io/en/stable/contributors_guide/index.html)
 
 
 ### Acceptance tests

@@ -1,0 +1,192 @@
+<% $rkhunter::config::allowdevfile.each |$allowdevfile| { -%>
+ALLOWDEVFILE=<%= $allowdevfile %>
+<% } -%>
+<% $rkhunter::config::allowhiddendir.each |$allowhiddendir| { -%>
+ALLOWHIDDENDIR=<%= $allowhiddendir %>
+<% } -%>
+<% $rkhunter::config::allowhiddenfile.each |$allowhiddenfile| { -%>
+ALLOWHIDDENFILE=<%= $allowhiddenfile %>
+<% } -%>
+<% $rkhunter::config::allowipcpid.each |$allowipcpid| { -%>
+ALLOWIPCPID=<%= $allowipcpid %>
+<% } -%>
+<% $rkhunter::config::allowipcproc.each |$allowipcproc| { -%>
+ALLOWIPCPROC=<%= $allowipcproc %>
+<% } -%>
+<% $rkhunter::config::allowipcuser.each |$allowipcuser| { -%>
+ALLOWIPCUSER=<%= $allowipcuser %>
+<% } -%>
+<% $rkhunter::config::allowprocdelfile.each |$allowprocdelfile| { -%>
+ALLOWPROCDELFILE=<%= $allowprocdelfile %>
+<% } -%>
+<% $rkhunter::config::allowproclisten.each |$allowproclisten| { -%>
+ALLOWPROCLISTEN=<%= $allowproclisten %>
+<% } -%>
+<% $rkhunter::config::allowpromiscif.each |$allowpromiscif| { -%>
+ALLOWPROMISCIF=<%= $allowpromiscif %>
+<% } -%>
+ALLOW_SSH_PROT_V1=<%= $rkhunter::config::allow_ssh_prot_v1 %>
+ALLOW_SSH_ROOT_USER=<%= $rkhunter::config::allow_ssh_root_user %>
+ALLOW_SYSLOG_REMOTE_LOGGING=<%= $rkhunter::config::allow_syslog_remote_logging %>
+APPEND_LOG=<%= $rkhunter::config::append_log %>
+<% $rkhunter::config::app_whitelist.each |$app_whitelist| { -%>
+APP_WHITELIST=<%= $app_whitelist %>
+<% } -%>
+<% $rkhunter::config::attrwhitelist.each |$attrwhitelist| { -%>
+ATTRWHITELIST=<%= $attrwhitelist %>
+<% } -%>
+AUTO_X_DETECT=<%= $rkhunter::config::auto_x_detect %>
+<% $rkhunter::config::bindir.each |$bindir| { -%>
+BINDIR=<%= $bindir %>
+<% } -%>
+COLOR_SET2=<%= $rkhunter::config::color_set2 %>
+COPY_LOG_ON_ERROR=<%= $rkhunter::config::copy_log_on_error %>
+DBDIR=<%= $rkhunter::config::dbdir %>
+<% $rkhunter::config::disable_tests.each |$disable_tests| { -%>
+DISABLE_TESTS=<%= $disable_tests %>
+<% } -%>
+<% $rkhunter::config::empty_logfiles.each |$empty_logfiles| { -%>
+EMPTY_LOGFILES=<%= $empty_logfiles %>
+<% } -%>
+<% $rkhunter::config::enable_tests.each |$enable_tests| { -%>
+ENABLE_TESTS=<%= $enable_tests %>
+<% } -%>
+<% if $rkhunter::config::epoch_date_cmd { -%>
+EPOCH_DATE_CMD=<%= $rkhunter::config::epoch_date_cmd %>
+<% } -%>
+<% $rkhunter::config::exclude_user_fileprop_files_dirs.each |$exclude_user_fileprop_files_dirs| { -%>
+EXCLUDE_USER_FILEPROP_FILES_DIRS=<%= $exclude_user_fileprop_files_dirs %>
+<% } -%>
+<% $rkhunter::config::existwhitelist.each |$existwhitelist| { -%>
+EXISTWHITELIST=<%= $existwhitelist %>
+<% } -%>
+GLOBSTAR=<%= $rkhunter::config::globstar %>
+HASH_CMD=<%= $rkhunter::config::hash_cmd %>
+HASH_FLD_IDX=<%= $rkhunter::config::hash_fld_idx %>
+<% $rkhunter::config::ignore_prelink_dep_err.each |$ignore_prelink_dep_err| { -%>
+IGNORE_PRELINK_DEP_ERR=<%= $ignore_prelink_dep_err %>
+<% } -%>
+IMMUTABLE_SET=<%= $rkhunter::config::immutable_set %>
+<% $rkhunter::config::immutwhitelist.each |$immutwhitelist| { -%>
+IMMUTWHITELIST=<%= $immutwhitelist %>
+<% } -%>
+<% $rkhunter::config::inetd_allowed_svc.each |$inetd_allowed_svc| { -%>
+INETD_ALLOWED_SVC=<%= $inetd_allowed_svc %>
+<% } -%>
+<% if $rkhunter::config::inetd_conf_path { -%>
+INETD_CONF_PATH=<%= $rkhunter::config::inetd_conf_path %>
+<% } -%>
+INSTALLDIR=<%= $rkhunter::config::installdir %>
+IPC_SEG_SIZE=<%= $rkhunter::config::ipc_seg_size %>
+LANGUAGE=<%= $rkhunter::config::language %>
+LOCK_TIMEOUT=<% $rkhunter::config::lock_timeout %>
+LOCKDIR=<% $rkhunter::config::lockdir %>
+LOGFILE=<%= $rkhunter::config::logfile %>
+<% if $rkhunter::config::mail_on_warning { -%> 
+MAIL-ON-WARNING=$rkhunter::config::mail_on_warning
+MAIL_CMD=<%= $rkhunter::config::mail_cmd %>
+<% } -%>
+MIRRORS_MODE=<%= $rkhunter::config::mirrors_mode %>
+<% $rkhunter::config::missing_logfiles.each |$missing_logfiles| { -%>
+MISSING_LOGFILES=<%= $missing_logfiles %>
+<% } -%>
+<% if $rkhunter::config::modules_dir { -%>
+MODULES_DIR=<%= $rkhunter::config::modules_dir %>
+<% } -%>
+OS_VERSION_FILE=<%= $rkhunter::config::os_version_file %>
+PASSWORD_FILE=<%= $rkhunter::config::password_file %>
+PHALANX2_DIRTEST=<%= $rkhunter::config::phalanx2_dirtest %>
+<% $rkhunter::config::pkgmgr_no_vrfy.each |$pkgmgr_no_vrfy| { -%>
+PKGMGR_NO_VRFY=<%= $pkgmgr_no_vrfy %>
+<% } -%>
+PKGMGR=<%= $rkhunter::config::pkgmgr %>
+<% $rkhunter::config::port_path_whitelist.each |$port_path_whitelist| { -%>
+PORT_PATH_WHITELIST=<%= $port_path_whitelist %>
+<% } -%>
+<% $rkhunter::config::port_whitelist.each |$port_whitelist| { -%>
+PORT_WHITELIST=<%= $port_whitelist %>
+<% } -%>
+<% $rkhunter::config::pwdless_accounts.each |$pwdless_accounts| { -%>
+PWDLESS_ACCOUNTS=<%= $pwdless_accounts %>
+<% } -%>
+<% if $rkhunter::config::readlink_cmd { -%>
+READLINK_CMD=<%= $rkhunter::config::readlink_cmd %>
+<% } -%>
+ROTATE_MIRRORS=<%= $rkhunter::config::rotate_mirrors %>
+<% $rkhunter::config::rtkt_dir_whitelist.each |$rtkt_dir_whitelist| { -%>
+RTKT_DIR_WHITELIST=<%= $rtkt_dir_whitelist %>
+<% } -%>
+<% $rkhunter::config::rtkt_file_whitelist.each |$rtkt_file_whitelist| { -%>
+RTKT_FILE_WHITELIST=<%= $rtkt_file_whitelist %>
+<% } -%>
+SCAN_MODE_DEV=<%= $rkhunter::config::scan_mode_dev %>
+<% if $rkhunter::config::scanrootkitmode { -%>
+SCANROOTKITMODE=<%= $rkhunter::config::scanrootkitmode %>
+<% } -%>
+SCRIPTDIR=<%= $rkhunter::config::scriptdir %>
+<% $rkhunter::config::scriptwhitelist.each |$scriptwhitelist| { -%>
+SCRIPTWHITELIST=<%= $scriptwhitelist %>
+<% } -%>
+<% $rkhunter::config::shared_lib_whitelist.each |$shared_lib_whitelist| { -%>
+SHARED_LIB_WHITELIST=<%= $shared_lib_whitelist %>
+<% } -%>
+SHOW_LOCK_MSGS=<%= $rkhunter::config::show_lock_msgs %>
+SHOW_SUMMARY_TIME=<%= $rkhunter::config::show_summary_time %>
+SHOW_SUMMARY_WARNINGS_NUMBER=<%= $rkhunter::config::show_summary_warning_number %>
+SKIP_INODE_CHECK=<%= $rkhunter::config::skip_inode_check %>
+SSH_CONFIG_DIR=<%= $rkhunter::config::ssh_config_dir %>
+<% $rkhunter::config::startup_paths.each |$startup_paths| { -%>
+STARTUP_PATHS=<%= $startup_paths %>
+<% } -%>
+<% if $rkhunter::config::stat_cmd { -%>
+STAT_CMD=<%= $rkhunter::config::stat_cmd %>
+<% } -%>
+<% $rkhunter::config::suspscan_dirs.each |$suspscan_dirs| { -%>
+SUSPSCAN_DIRS=<%= $suspscan_dirs %>
+<% } -%>
+SUSPSCAN_MAXSIZE=<%= $rkhunter::config::suspscan_maxsize %>
+SUSPSCAN_TEMP=<%= $rkhunter::config::suspscan_temp %>
+SUSPSCAN_THRESH=<%= $rkhunter::config::suspscan_thresh %>
+<% $rkhunter::config::suspscan_whitelist.each |$suspscan_whitelist| { -%>
+SUSPSCAN_WHITELIST=<%= $suspscan_whitelist %>
+<% } -%>
+<% $rkhunter::config::syslog_config_file.each |$syslog_config_file| { -%>
+SYSLOG_CONFIG_FILE=<%= $syslog_config_file %>
+<% } -%>
+TMPDIR=<%= $rkhunter::config::tmpdir %>
+<% $rkhunter::config::uid0_accounts.each |$uid0_accounts| { -%>
+UID0_ACCOUNTS=<%= $uid0_accounts %>
+<% } -%>
+<% $rkhunter::config::unhide_tests.each |$unhide_tests| { -%>
+UNHIDE_TESTS=<%= $unhide_tests %>
+<% } -%>
+<% $rkhunter::config::unhidetcp_opts.each |$unhidetcp_opts| { -%>
+UNHIDETCP_OPTS=<%= $unhidetcp_opts %>
+<% } -%>
+<% $rkhunter::config::update_lang.each |$update_lang| { -%>
+UPDATE_LANG=<%= $update_lang %>
+<% } -%>
+UPDATE_MIRRORS=<%= $rkhunter::config::update_mirrors %>
+UPDT_ON_OS_CHANGE=<%= $rkhunter::config::updt_on_os_change %>
+USE_LOCKING=<%= $rkhunter::config::use_locking %>
+<% $rkhunter::config::user_fileprop_files_dirs.each |$user_fileprop_files_dirs| { -%>
+USER_FILEPROP_FILES_DIRS=<%= $user_fileprop_files_dirs %>
+<% } -%>
+USE_SUNSUM=<%= $rkhunter::config::use_sunsum %>
+<% if $rkhunter::config::use_syslog { -%>
+USE_SYSLOG=<%= $rkhunter::config::syslog_facility %>.<%= $rkhunter::config::syslog_priority %>
+<% } -%>
+WARN_ON_OS_CHANGE=<%= $rkhunter::config::warn_on_os_change %>
+<% if $rkhunter::config::web_cmd { -%>
+WEB_CMD=<%= $rkhunter::config::web_cmd %>
+<% } -%>
+WHITELISTED_IS_WHITE=<%= $rkhunter::config::whitelisted_is_white %>
+<% $rkhunter::config::writewhitelist.each |$writewhitelist| { -%>
+WRITEWHITELIST=<%= $writewhitelist %>
+<% } -%>
+<% $rkhunter::config::xinetd_allowed_svc.each |$xinetd_allowed_svc| { -%>
+XINETD_ALLOWED_SVC=<%= $xinetd_allowed_svc %>
+<% } -%>
+<% if $rkhunter::config::xinetd_conf_path { -%>
+XINETD_CONF_PATH=<%= $rkhunter::config::xinetd_conf_path %>
+<% } -%>

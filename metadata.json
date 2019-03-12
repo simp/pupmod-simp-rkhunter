@@ -41,5 +41,9 @@
       "name": "puppetlabs/stdlib",
       "version_requirement": "< 6.0.0"
     },
+    {
+      "name": "simp/simplib",
+      "version_requirement": ">= 3.14.0 < 4.0.0"
+    },
   ]
 }
