@@ -23,23 +23,21 @@
 # @author https://github.com/simp/pupmod-simp-rkhunter/graphs/contributors
 #
 class rkhunter (
-  Simplib:Cron:Minute    $upd_minute                  = 5,
-  Simplib:Cron:Hour      $upd_hour                    = 0,
-  Simplib:Cron:MonthDay  $upd_monthday                = '*',
-  Simplib:Cron:Month     $upd_month                   = '*',
-  Simplib:Cron:Weekday   $upd_weekday                 = '*',
-  String                 $upd_command                 = ,
-  Simplib:Cron:Minute    $minute                      = 25,
-  Simplib:Cron:Hour      $hour                        = 0,
-  Simplib:Cron:MonthDay  $monthday                    = '*',
-  Simplib:Cron:Month     $month                       = '*',
-  Simplib:Cron:Weekday   $weekday                     = '*',
-  String                 $command                     = ,
-  Optional[Boolean]      $check_for_updates           = undef
+  Simplib::Cron::Minute    $upd_minute                  = 5,
+  Simplib::Cron::Hour      $upd_hour                    = 0,
+  Simplib::Cron::MonthDay  $upd_monthday                = '*',
+  Simplib::Cron::Month     $upd_month                   = '*',
+  Simplib::Cron::Weekday   $upd_weekday                 = '*',
+  Simplib::Cron::Minute    $minute                      = 25,
+  Simplib::Cron::Hour      $hour                        = 0,
+  Simplib::Cron::MonthDay  $monthday                    = '*',
+  Simplib::Cron::Month     $month                       = '*',
+  Simplib::Cron::Weekday   $weekday                     = '*',
+  Optional[Boolean]      $check_for_updates           = undef,
   String[1]              $package_ensure              = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
-  Stdlib::Absolutepath   $rkhunter_conf_file          = '/etc/rkhunter.conf',
+  Stdlib::Unixpath       $rkhunter_conf_file          = '/etc/rkhunter.conf',
   Optional[Boolean]      $drop_rkhunter_complete_conf = undef,
-  Stdlib::Absolutepath   $full_conf_drop_path         = '/etc/rkhunter.conf.README',
+  Stdlib::Unixpath       $full_conf_drop_path         = '/etc/rkhunter.conf.README'
 ) {
 
   simplib::assert_metadata($module_name)
@@ -63,7 +61,7 @@ class rkhunter (
     group        => 'root',
     mode         => '0640',
     content      => epp("${module_name}/rkhunter-conf.epp"),
-    require      => Package['rkhunter']
+    require      => Package['rkhunter'],
     validate_cmd => 'rkhunter -C --configfile %'
   }
 
@@ -75,8 +73,8 @@ class rkhunter (
       group        => 'root',
       mode         => '0440',
       content      => file("${module_name}/rkhunter.conf.README"),
-      require      => Package['rkhunter']
-      validate_cmd => "file %'
+      require      => Package['rkhunter'],
+      validate_cmd => 'file %'
     }
   }
 
