@@ -33,16 +33,13 @@ class rkhunter (
   Simplib::Cron::MonthDay  $monthday                    = '*',
   Simplib::Cron::Month     $month                       = '*',
   Simplib::Cron::Weekday   $weekday                     = '*',
-  Optional[Boolean]      $check_for_updates           = undef,
-  String[1]              $package_ensure              = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
-  Stdlib::Unixpath       $rkhunter_conf_file          = '/etc/rkhunter.conf',
-  Optional[Boolean]      $drop_rkhunter_complete_conf = undef,
-  Stdlib::Unixpath       $full_conf_drop_path         = '/etc/rkhunter.conf.README'
+  Optional[Boolean]        $check_for_updates           = undef,
+  String[1]                $package_ensure              = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
+  Optional[Boolean]        $drop_rkhunter_complete_conf = undef,
+  Stdlib::Unixpath         $full_conf_drop_path         = '/etc/rkhunter.conf.README'
 ) {
 
   simplib::assert_metadata($module_name)
-
-  include '::rkhunter::config'
 
   # Some tests require single-purpose tools, if rkhunter has
   # them then it will use them. Unhide is one such tool. 
@@ -55,19 +52,8 @@ class rkhunter (
     require => Package['unhide']
   }
 
-  file { $rkhunter_conf_file:
-    ensure       => 'file',
-    owner        => 'root',
-    group        => 'root',
-    mode         => '0640',
-    content      => epp("${module_name}/rkhunter-conf.epp"),
-    require      => Package['rkhunter'],
-    validate_cmd => 'rkhunter -C --configfile %'
-  }
-
   if $drop_rkhunter_complete_conf {
     file { $full_conf_drop_path:
-      path         => $full_conf_drop_path,
       ensure       => 'file',
       owner        => 'root',
       group        => 'root',
@@ -77,6 +63,7 @@ class rkhunter (
       validate_cmd => 'file %'
     }
   }
+  include '::rkhunter::config'
 
   if $check_for_updates {
     cron { 'rkhunter_update':
@@ -86,7 +73,7 @@ class rkhunter (
       month    => $upd_month,
       monthday => $upd_monthday,
       weekday  => $upd_weekday,
-      require  => [ Package['rkhunter'], Package['unhide'], File[ $rkhunter_conf_file ] ]
+      require  => [ Package['rkhunter'], Package['unhide'], File[ '/etc/rkhunter.conf' ] ]
     }
   }
 
@@ -97,6 +84,6 @@ class rkhunter (
     month    => $month,
     monthday => $monthday,
     weekday  => $weekday,
-    require  => [ Package['rkhunter'], Package['unhide'], File[ $rkhunter_conf_file ] ]
+    require  => [ Package['rkhunter'], Package['unhide'], File[ '/etc/rkhunter.conf' ] ]
   }
 }

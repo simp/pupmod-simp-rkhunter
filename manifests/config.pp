@@ -227,6 +227,7 @@ class rkhunter::config (
   Optional[Stdlib::Unixpath]
                               $xinetd_conf_path                  = undef
 ) {
+  assert_private()
 
   if $use_syslog {
     unless $syslog_facility and $syslog_severity {
@@ -234,4 +235,13 @@ class rkhunter::config (
     }
   }
 
+  file { '/etc/rkhunter.conf':
+    ensure       => 'file',
+    owner        => 'root',
+    group        => 'root',
+    mode         => '0640',
+    content      => epp("${module_name}/rkhunter-conf.epp"),
+    require      => Package['rkhunter'],
+    validate_cmd => 'rkhunter -C --configfile %'
+  }
 }
