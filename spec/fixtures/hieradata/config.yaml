@@ -1,0 +1,85 @@
+---
+rkhunter::config::allowdevfile:
+  - '/some/path'
+rkhunter::config::allowhiddendir:
+  - '/some/path'
+rkhunter::config::allowhiddenfile:
+  - '/some/path'
+rkhunter::config::allowipcpid:
+  - 852
+rkhunter::config::allowipcproc:
+  - '/some/path'
+rkhunter::config::allowipcuser:
+  - '/some/path'
+rkhunter::config::allowprocdelfile:
+  - '/some/path'
+rkhunter::config::allowproclisten:
+  - '/some/path'
+rkhunter::config::allowpromiscif:
+  - '/some/path'
+rkhunter::config::app_whitelist:
+  - '/some/path'
+rkhunter::config::attrwhitelist:
+  - '/some/path'
+rkhunter::config::bindir:
+  - '/some/path'
+rkhunter::config::empty_logfiles:
+  - '/some/path'
+rkhunter::config::epoch_date_cmd: '/some/path'
+rkhunter::config::exclude_user_fileprop_files_dirs:
+  - '/some/path'
+rkhunter::config::existwhitelist:
+  - '/some/path'
+rkhunter::config::ignore_prelink_dep_err:
+  - '/some/path'
+rkhunter::config::immutwhitelist:
+  - '/some/path'
+rkhunter::config::inetd_allowed_svc:
+  - '/some/path'
+rkhunter::config::inetd_conf_path: '/some/path'
+rkhunter::config::mail_on_warning:
+  - 'blah blah'
+rkhunter::config::missing_logfiles:
+  - '/some/path'
+rkhunter::config::modules_dir: '/some/path'
+rkhunter::config::os_version_file: '/etc/redhat-release'
+rkhunter::config::password_file: '/some/path'
+rkhunter::config::pkgmgr_no_vrfy:
+  - '/some/path'
+rkhunter::config::port_path_whitelist:
+  - '/some/path'
+rkhunter::config::port_whitelist:
+  - 'TCP:51'
+rkhunter::config::pwdless_accounts:
+  - '/some/path'
+rkhunter::config::readlink_cmd: '/bin/ls'
+rkhunter::config::rtkt_dir_whitelist:
+  - '/some/path'
+rkhunter::config::rtkt_file_whitelist:
+  - '/some/path'
+rkhunter::config::scanrootkitmode: 'THOROUGH'
+rkhunter::config::scriptwhitelist:
+  - '/some/path'
+rkhunter::config::shared_lib_whitelist:
+  - '/some/path'
+rkhunter::config::startup_paths:
+  - '/dev/'
+rkhunter::config::stat_cmd: '/bin/ls'
+rkhunter::config::suspscan_dirs:
+  - '/some/path'
+rkhunter::config::suspscan_whitelist:
+  - '/some/path'
+rkhunter::config::syslog_config_file:
+  - '/some/path'
+rkhunter::config::uid0_accounts:
+  - '/some/path'
+rkhunter::config::update_lang:
+  - '/some/path'
+rkhunter::config::user_fileprop_files_dirs:
+  - '/some/path'
+rkhunter::config::web_cmd: 'curl'
+rkhunter::config::writewhitelist:
+  - '/some/path'
+rkhunter::config::xinetd_allowed_svc:
+  - '/some/path'
+rkhunter::config::xinetd_conf_path: '/some/path'

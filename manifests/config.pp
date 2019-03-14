@@ -170,7 +170,8 @@ class rkhunter::config (
   String[1]                   $pkgmgr                            = 'RPM',
   Optional[Array[Stdlib::Unixpath]]
                               $port_path_whitelist               = undef,
-  Optional[Array[String[1]]]  $port_whitelist                    = undef,
+  Optional[Array[Rkhunter::PortWhitelist]]
+                              $port_whitelist                    = undef,
   Optional[Array[String[1]]]  $pwdless_accounts                  = undef,
   Optional[String[1]]         $readlink_cmd                      = undef,
   Integer[0,1]                $rotate_mirrors                    = 1,
