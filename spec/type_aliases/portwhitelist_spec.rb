@@ -8,7 +8,6 @@ describe 'Rkhunter::PortWhitelist' do
   end
   context 'with invalid parameters' do
     it { is_expected.not_to allow_value( '*' ) }
-    it { is_expected.not_to allow_value( 'TCP:135' ) }
     it { is_expected.not_to allow_value( 'tcp:135' ) }
     it { is_expected.not_to allow_value( 'udp:2516' ) }
     it { is_expected.not_to allow_value( 'UDP:2516,TCP:459' ) }
