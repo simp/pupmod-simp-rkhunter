@@ -95,6 +95,7 @@
 #
 
 class rkhunter::config (
+  String[1]                   $package_ensure                    = $::rkhunter::package_ensure,
   Optional[Array[Stdlib::Unixpath]]
                               $allowdevfile                      = undef,
   Optional[Array[Stdlib::Unixpath]]
@@ -228,6 +229,25 @@ class rkhunter::config (
                               $xinetd_conf_path                  = undef
 ) {
   assert_private()
+
+  # Some tests require single-purpose tools, if rkhunter has
+  # them then it will use them. Unhide is one such tool. 
+  package { 'unhide':
+    ensure => $package_ensure
+  }
+
+  package { 'rkhunter':
+    ensure  => $package_ensure,
+    require => Package['unhide'],
+    notify  => Exec['propupd']
+  }
+
+  exec { 'propupd':
+    command   => 'rkhunter --propupd',
+    creates   => "${dbdir}/rkhunter.dat",
+    subscribe => Package['rkhunter'],
+    path      => ['/bin', '/usr/bin']
+  }
 
   if $use_syslog {
     unless $syslog_priority {

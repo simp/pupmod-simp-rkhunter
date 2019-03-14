@@ -41,17 +41,6 @@ class rkhunter (
 
   simplib::assert_metadata($module_name)
 
-  # Some tests require single-purpose tools, if rkhunter has
-  # them then it will use them. Unhide is one such tool. 
-  package { 'unhide':
-    ensure => $package_ensure
-  }
-
-  package { 'rkhunter':
-    ensure  => $package_ensure,
-    require => Package['unhide']
-  }
-
   if $drop_rkhunter_complete_conf {
     file { $full_conf_drop_path:
       ensure       => 'file',
@@ -78,7 +67,7 @@ class rkhunter (
   }
 
   cron { 'rkhunter':
-    command  => 'if test -f /var/lib/rkhunter/db/rkhunter.dat; then rkhunter --check --skip-keypress --quiet; else rkhunter --check --skip-keypress --quiet --propupd; fi',
+    command  => 'rkhunter --check --skip-keypress --quiet',
     minute   => $minute,
     hour     => $hour,
     month    => $month,
