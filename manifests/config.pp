@@ -230,8 +230,8 @@ class rkhunter::config (
   assert_private()
 
   if $use_syslog {
-    unless $syslog_facility and $syslog_severity {
-      error("Must supply a valid syslog_facility and syslog_severity if 'use_syslog = true'.")
+    unless $syslog_priority {
+      error("Must supply a valid syslog_priority if 'use_syslog = true'.")
     }
   }
 
