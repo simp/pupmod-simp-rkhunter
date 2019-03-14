@@ -248,7 +248,7 @@ USER_FILEPROP_FILES_DIRS=<%= $user_fileprop_files_dirs %>
 <% } -%>
 USE_SUNSUM=<%= $rkhunter::config::use_sunsum %>
 <% if $rkhunter::config::use_syslog { -%>
-USE_SYSLOG=<%= $rkhunter::config::syslog_facility %>.<%= $rkhunter::config::syslog_severity %>
+USE_SYSLOG=<%= $rkhunter::config::syslog_priority %>
 <% } -%>
 WARN_ON_OS_CHANGE=<%= $rkhunter::config::warn_on_os_change %>
 <% if $rkhunter::config::web_cmd { -%>

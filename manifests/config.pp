@@ -216,8 +216,7 @@ class rkhunter::config (
   Integer[0,1]                $use_sunsum                        = 0,
   #syslog verification, will combine in template to set rk's USE_SYSLOG
   #both of these values must be set to use syslog
-  Simplib::Syslog::Facility   $syslog_facility                   = 'LOCAL6',
-  Simplib::Syslog::Severity   $syslog_severity                   = 'NOTICE',
+  Simplib::Syslog::Priority   $syslog_priority                   = 'LOCAL6.NOTICE',
   Boolean                     $use_syslog                        = true,
   Integer[0,1]                $warn_on_os_change                 = 1,
   Optional[String[1]]         $web_cmd                           = undef, #shuold keep? rkhunter auto selects one
