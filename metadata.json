@@ -1,0 +1,49 @@
+{
+  "name": "simp-rkhunter",
+  "version": "0.0.1",
+  "author": "SIMP Team",
+  "summary": "A SIMP puppet module for managing rkhunter",
+  "license": "Apache-2.0",
+  "source": "https://github.com/simp/pupmod-simp-rkhunter",
+  "project_page": "https://github.com/simp/pupmod-simp-rkhunter",
+  "issues_url": "https://simp-project.atlassian.net",
+  "tags": [
+    "simp"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 5.5.7 < 7.0.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": "< 6.0.0"
+    },
+    {
+      "name": "simp/simplib",
+      "version_requirement": ">= 3.14.0 < 4.0.0"
+    }
+  ]
+}
