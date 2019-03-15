@@ -224,14 +224,6 @@ class rkhunter::config (
     }
   }
 
-  file { '/tmp/rkhunter.conf':
-    ensure       => 'file',
-    owner        => 'root',
-    group        => 'root',
-    mode         => '0640',
-    content      => epp("${module_name}/rkhunter-conf.epp")
-  }
-
   file { '/etc/rkhunter.conf':
     ensure       => 'file',
     owner        => 'root',
