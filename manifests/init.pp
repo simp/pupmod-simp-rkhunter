@@ -1,78 +1,41 @@
 # Installs rkhunter and sets up cron job
 # to run rkhunter once per day
 #
-# @param upd_minute   Cron minute for update check
-# @param upd_hour     Cron hour for update check
-# @param upd_monthday Cron monthday for update check
-# @param upd_month    Cron month for update check
-# @param upd_weekday  Cron weekday for update check
-# @param minute       Cron minute
-# @param hour         Cron hour
-# @param monthday     Cron monthday
-# @param month        Cron month
-# @param weekday      Cron weekday
+# @param check_for_updates
+#   Check internet for definition updates
 #
-# @param package_ensure                The ensure status of packages to be managed
+# @param enable_system_check
+#   Set rkhunter to check the system on a regular basis
 #
-# @param rkhunter_conf_file            The path to the conf file
-#
-# @param rkhunter_conf_file_template   Template to use for the conf file
-#
-# @param check_for_updates             Check internet for definition updates
+# @param install_optional_packages
+#   Install packages that enhance the capabilities of rkhunter
 #
 # @author https://github.com/simp/pupmod-simp-rkhunter/graphs/contributors
 #
 class rkhunter (
-  Simplib::Cron::Minute    $upd_minute                  = 5,
-  Simplib::Cron::Hour      $upd_hour                    = 0,
-  Simplib::Cron::MonthDay  $upd_monthday                = '*',
-  Simplib::Cron::Month     $upd_month                   = '*',
-  Simplib::Cron::Weekday   $upd_weekday                 = '*',
-  Simplib::Cron::Minute    $minute                      = 25,
-  Simplib::Cron::Hour      $hour                        = 0,
-  Simplib::Cron::MonthDay  $monthday                    = '*',
-  Simplib::Cron::Month     $month                       = '*',
-  Simplib::Cron::Weekday   $weekday                     = '*',
-  Optional[Boolean]        $check_for_updates           = undef,
-  String[1]                $package_ensure              = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
-  Optional[Boolean]        $drop_rkhunter_complete_conf = undef,
-  Stdlib::Unixpath         $full_conf_drop_path         = '/etc/rkhunter.conf.README'
+  Boolean $check_for_updates         = false,
+  Boolean $enable_system_check       = true,
+  Boolean $install_optional_packages = true
 ) {
 
   simplib::assert_metadata($module_name)
 
-  if $drop_rkhunter_complete_conf {
-    file { $full_conf_drop_path:
-      ensure       => 'file',
-      owner        => 'root',
-      group        => 'root',
-      mode         => '0440',
-      content      => file("${module_name}/rkhunter.conf.README"),
-      require      => Package['rkhunter'],
-      validate_cmd => 'file %'
-    }
-  }
-  include '::rkhunter::config'
+  include 'rkhunter::install'
+  include 'rkhunter::config'
+
+  Class['rkhunter::install'] -> Class['rkhunter::config']
 
   if $check_for_updates {
-    cron { 'rkhunter_update':
-      command  => 'rkhunter --update --nocolors',
-      minute   => $upd_minute,
-      hour     => $upd_hour,
-      month    => $upd_month,
-      monthday => $upd_monthday,
-      weekday  => $upd_weekday,
-      require  => [ Package['rkhunter'], Package['unhide'], File[ '/etc/rkhunter.conf' ] ]
-    }
+    include 'rkhunter::update'
+    Class['rkhunter::config'] -> Class['rkhunter::update']
   }
 
-  cron { 'rkhunter':
-    command  => 'rkhunter --check --skip-keypress --quiet',
-    minute   => $minute,
-    hour     => $hour,
-    month    => $month,
-    monthday => $monthday,
-    weekday  => $weekday,
-    require  => [ Package['rkhunter'], Package['unhide'], File[ '/etc/rkhunter.conf' ] ]
+  if $enable_system_check {
+    include 'rkhunter::check'
+    Class['rkhunter::config'] -> Class['rkhunter::check']
+  }
+
+  if $check_for_updates and $enable_system_check {
+    Class['rkhunter::update'] -> Class['rkhunter::check']
   }
 }

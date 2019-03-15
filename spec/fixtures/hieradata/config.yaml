@@ -1,10 +1,4 @@
 ---
-rkhunter::config::allowdevfile:
-  - '/some/path'
-rkhunter::config::allowhiddendir:
-  - '/some/path'
-rkhunter::config::allowhiddenfile:
-  - '/some/path'
 rkhunter::config::allowipcpid:
   - 852
 rkhunter::config::allowipcproc:
@@ -30,6 +24,8 @@ rkhunter::config::exclude_user_fileprop_files_dirs:
   - '/some/path'
 rkhunter::config::existwhitelist:
   - '/some/path'
+rkhunter::config::hash_cmd: 'sha256'
+rkhunter::config::hash_fld_idx: 1
 rkhunter::config::ignore_prelink_dep_err:
   - '/some/path'
 rkhunter::config::immutwhitelist:
@@ -48,8 +44,10 @@ rkhunter::config::pkgmgr_no_vrfy:
   - '/some/path'
 rkhunter::config::port_path_whitelist:
   - '/some/path'
-rkhunter::config::port_whitelist:
-  - 'TCP:51'
+rkhunter::config::tcp_port_whitelist:
+  - 51
+rkhunter::config::udp_port_whitelist:
+  - 15
 rkhunter::config::pwdless_accounts:
   - '/some/path'
 rkhunter::config::readlink_cmd: '/bin/ls'
@@ -57,7 +55,7 @@ rkhunter::config::rtkt_dir_whitelist:
   - '/some/path'
 rkhunter::config::rtkt_file_whitelist:
   - '/some/path'
-rkhunter::config::scanrootkitmode: 'THOROUGH'
+rkhunter::config::scanrootkitmode: true
 rkhunter::config::scriptwhitelist:
   - '/some/path'
 rkhunter::config::shared_lib_whitelist:
