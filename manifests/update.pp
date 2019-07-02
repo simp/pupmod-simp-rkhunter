@@ -1,4 +1,4 @@
-# Add a cron job to check for rkhunter updates
+# @summary Add a cron job to check for rkhunter updates
 #
 # @param minute   Cron minute
 # @param hour     Cron hour

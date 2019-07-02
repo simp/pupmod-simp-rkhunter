@@ -6,30 +6,35 @@
 
 #### Table of Contents
 
-1. [Description](#description)
-2. [Setup - The basics of getting started with rkhunter](#setup)
-    * [What rkhunter affects](#what-rkhunter-affects)
-    * [Beginning with rkhunter](#beginning-with-rkhunter)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
-    * [Acceptance Tests - Beaker env variables](#acceptance-tests)
+<!-- vim-markdown-toc GFM -->
 
+* [Description](#description)
+  * [This is a SIMP module](#this-is-a-simp-module)
+* [Setup](#setup)
+  * [What rkhunter affects](#what-rkhunter-affects)
+  * [Beginning with rkhunter](#beginning-with-rkhunter)
+* [Usage](#usage)
+* [Reference](#reference)
+* [Limitations](#limitations)
+* [Development](#development)
+  * [Acceptance tests](#acceptance-tests)
+
+<!-- vim-markdown-toc -->
 
 ## Description
 
-A SIMP Puppet module for managing rkhunter, a daemon that checks for rootkits
+A SIMP Puppet module for managing `rkhunter`, an application that checks for rootkits
 on a Linux system.
 
+See [REFERENCE.md](REFERENCE.md) for more details.
 
 ### This is a SIMP module
 
 This module is a component of the [System Integrity Management Platform](https://simp-project.com),
 a compliance-management framework built on Puppet.
 
-If you find any issues, they may be submitted to our [bug
-tracker](https://simp-project.atlassian.net/).
+If you find any issues, they may be submitted to our
+[bug tracker](https://simp-project.atlassian.net/).
 
 This module is optimally designed for use within a larger SIMP ecosystem, but
 it can be used independently:
@@ -44,31 +49,32 @@ it can be used independently:
 ### What rkhunter affects
 
 This module configures:
-  * rkhunter package
-  * unhide package
-  * rkhunter cron jobs
+  * `rkhunter` package
+  * `unhide` package
+  * `rkhunter` cron jobs
 
-Some tests require single-purpose tools, if rkhunter has them then it will use
-them. Unhide is one such tool.
+Some tests require single-purpose tools, if `rkhunter` has them then it will
+use them. `unhide` is one such tool.
 
 ### Beginning with rkhunter
 
-To use this module with it's default settings, just instantiate it. The
-following example is in hiera:
+To use this module with its default settings, just instantiate it. The
+following example adds it to the include list for a SIMP system.
 
   ```yaml
   ---
-  classes:
+  simp_classes:
     - rkhunter
-
   ```
+
+Alternatively, you can simply `include rkhunter`.
 
 
 ## Usage
 
-The class will install the packages and crob jobs automatically.
+The class will install the packages and `cron` jobs automatically.
 
-The output of the cron jobs will be sent to the default cron mechanism.
+The output of the `cron` jobs will be sent to the default `cron` mechanism.
 
 
 ## Reference
@@ -80,9 +86,9 @@ module's generated YARD documentation for reference material.
 ## Limitations
 
 SIMP Puppet modules are generally intended for use on Red Hat Enterprise Linux
-and compatible distributions, such as CentOS. Please see the [`metadata.json`
-file](./metadata.json) for the most up-to-date list of supported operating
-systems, Puppet versions, and module dependencies.
+and compatible distributions, such as CentOS. Please see the
+[`metadata.json` file](./metadata.json) for the most up-to-date list of
+supported operating systems, Puppet versions, and module dependencies.
 
 
 ## Development
