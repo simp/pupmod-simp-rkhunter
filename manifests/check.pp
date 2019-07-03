@@ -1,4 +1,4 @@
-# Sets a cron job for rkhunter to check the system
+# @summary Sets a cron job for rkhunter to check the system
 #
 # @param minute   Cron minute
 # @param hour     Cron hour

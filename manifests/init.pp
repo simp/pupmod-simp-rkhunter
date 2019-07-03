@@ -1,5 +1,4 @@
-# Installs rkhunter and sets up cron job
-# to run rkhunter once per day
+# @summary Installs rkhunter and sets up cron job to run rkhunter once per day
 #
 # @param check_for_updates
 #   Check internet for definition updates

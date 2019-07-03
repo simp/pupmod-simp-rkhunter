@@ -1,7 +1,7 @@
-# Configure rkhunter
+# @summary Configure rkhunter
 #
 # Any parameter that is not documented below matches its direct counterpart in
-# the rkhunter.conf configuration file.
+# the `rkhunter.conf` configuration file.
 #
 # You may need to extract a copy from the RPM for the full documentation set.
 #
@@ -104,6 +104,7 @@
 # @param use_locking
 # @param user_fileprop_files_dirs
 # @param use_sunsum
+# @param syslog_priority
 # @param use_syslog
 # @param warn_on_os_change
 # @param web_cmd

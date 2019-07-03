@@ -1,4 +1,4 @@
-# Install rkhunter
+# @summary Install rkhunter
 #
 # @param install_optional_packages
 #   Install optional packages that enable additional functionality in rkhunter
