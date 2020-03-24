@@ -1,0 +1,4 @@
+---
+rkhunter::config::extra_pkgs:
+  - unhide
+
