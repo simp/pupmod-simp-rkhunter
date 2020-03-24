@@ -52,3 +52,5 @@ rkhunter::config::allowdevfile:
   - "/dev/shm/pulse-shm-*"
   - "/dev/md/md-device-map"
   - "/dev/shm/sem.slapd-*.stats"
+
+rkhunter::install_optional_packages: true

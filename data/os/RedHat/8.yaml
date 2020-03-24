@@ -1,3 +1,4 @@
 ---
-rkhunter::config::extra_pkgs: []
+rkhunter::install_optional_packages: false
+rkhunter::config::optional_packages: []
 

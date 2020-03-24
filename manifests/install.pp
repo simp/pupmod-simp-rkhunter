@@ -19,8 +19,8 @@
 # @author https://github.com/simp/pupmod-simp-rkhunter/graphs/contributors
 #
 class rkhunter::install (
+  Variant[Hash[String[1],Hash],Array[String[1]]] $optional_packages, #Data in modules
   Boolean                                        $install_optional_packages = $rkhunter::install_optional_packages,
-  Variant[Hash[String[1],Hash],Array[String[1]]] $optional_packages         = ['unhide'],
   Simplib::PackageEnsure                         $optional_package_ensure   = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
   String[1]                                      $rkhunter_package_ensure   = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' })
 ) {
