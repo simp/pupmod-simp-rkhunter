@@ -15,8 +15,14 @@ describe 'rkhunter' do
           it { is_expected.to create_class('rkhunter::check').that_requires('Class[rkhunter::config]') }
 
           it { is_expected.to create_package('rkhunter') }
-          it { is_expected.to create_package('unhide') }
           it { is_expected.to create_cron('rkhunter') }
+
+          if os_facts[:os][:release][:major].to_i >= 8
+            it { is_expected.to_not create_package('unhide') }
+          else
+            it { is_expected.to create_package('unhide') }
+          end
+            
         end
 
         context 'when checking for updates' do
@@ -27,6 +33,7 @@ describe 'rkhunter' do
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to create_class('rkhunter::update').that_requires('Class[rkhunter::config]') }
         end
+
       end
     end
   end

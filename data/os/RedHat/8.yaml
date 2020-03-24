@@ -1,4 +1,2 @@
 ---
 rkhunter::install_optional_packages: false
-rkhunter::config::optional_packages: []
-

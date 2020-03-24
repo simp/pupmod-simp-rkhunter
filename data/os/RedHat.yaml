@@ -1,4 +1,6 @@
 ---
-rkhunter::config::extra_pkgs:
+rkhunter::install_optional_packages: true
+  
+rkhunter::install::optional_packages:
   - unhide
 
