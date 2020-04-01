@@ -11,6 +11,10 @@
 * [`rkhunter::install`](#rkhunterinstall): Install rkhunter
 * [`rkhunter::update`](#rkhunterupdate): Add a cron job to check for rkhunter updates
 
+**Data types**
+
+* [`Rkhunter::BindPath`](#rkhunterbindpath): matches valid binddir path accepts absolute path or an absolute path with a '+' proceeding it
+
 ## Classes
 
 ### rkhunter
@@ -882,14 +886,14 @@ Default value: $rkhunter::install_optional_packages
 
 ##### `optional_packages`
 
-Data type: `Variant[Hash[String[1],Hash],Array[String[1]]]`
+Data type: `Optional[Variant[Hash[String[1],Hash],Array[String[1]]]]`
 
 The list of optional packages to be installed
 
 This may be anything that the puppetlabs-stdlib ``ensure_packages``
 function accepts
 
-Default value: ['unhide']
+Default value: `undef`
 
 ##### `optional_package_ensure`
 
@@ -963,4 +967,14 @@ Data type: `Array[String[1]]`
 Extra options to pass to ``rkhunter --update``
 
 Default value: ['--nocolors']
+
+## Data types
+
+### Rkhunter::BindPath
+
+matches valid binddir path
+accepts absolute path or an absolute path
+with a '+' proceeding it
+
+Alias of `Pattern['^(?:\/|\+\/)(?:[^\/\0]+\/*)*$']`
 

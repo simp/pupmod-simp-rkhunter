@@ -27,11 +27,13 @@ describe 'rkhunter' do
 
         context 'when checking for updates' do
           let(:params) {{
-            :check_for_updates => true
+            :check_for_updates => true,
+            :install_optional_packages => false
           }}
 
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to create_class('rkhunter::update').that_requires('Class[rkhunter::config]') }
+          it { is_expected.to_not create_package('unhide') }
         end
 
       end

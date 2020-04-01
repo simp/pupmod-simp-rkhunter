@@ -8,7 +8,6 @@
 HOSTS:
   el8:
     roles:
-      - master
       - client
     platform:   el-8-x86_64
     box:        centos/8
