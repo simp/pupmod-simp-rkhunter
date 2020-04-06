@@ -13,23 +13,24 @@ describe 'rkhunter class' do
     context 'default parameters' do
       # Using puppet_apply as a helper
       it 'should work with no errors' do
-        apply_manifest(manifest, :catch_failures => true)
+        apply_manifest_on(host, manifest, :catch_failures => true)
       end
 
       it 'should be idempotent' do
-        apply_manifest(manifest, :catch_changes => true)
+        apply_manifest_on(host, manifest, :catch_changes => true)
       end
 
-      describe package('unhide') do
-        it { is_expected.to be_installed }
+      if host[:platform] =~ %r{el-7-x86_64}
+        it 'should install unhide' do
+          expect(check_for_package(host,'unhide')).to be true
+        end
       end
 
-      describe package('rkhunter') do
-        it { is_expected.to be_installed }
+      it 'should have rkhunter installed'  do
+        expect(check_for_package(host,'rkhunter')).to be true
       end
 
       it 'should create the conf file' do
-        apply_manifest(manifest, :catch_changes => true)
         on(host, %(test -f /etc/rkhunter.conf))
       end
 
@@ -38,12 +39,11 @@ describe 'rkhunter class' do
       end
 
       it 'should generate the database' do
-        on(host, %(sed -i 's/^PATH=PATH/export PATH=PATH/' .ssh/environment;))
-        on(host, %(rkhunter --propupd))
         on(host, %(test -f /var/lib/rkhunter/db/rkhunter.dat))
       end
 
       it 'should run rkhutner successfully without warnings' do
+        on(host, %(sed -i 's/^PATH=PATH/export PATH=PATH/' .ssh/environment;))
         on(host, %(rkhunter --check --skip-keypress --disable passwd_changes,group_changes,system_configs_ssh))
       end
 

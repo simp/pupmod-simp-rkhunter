@@ -1,0 +1,2 @@
+---
+rkhunter::install_optional_packages: false

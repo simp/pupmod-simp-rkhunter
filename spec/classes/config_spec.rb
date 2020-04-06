@@ -1,34 +1,30 @@
 require 'spec_helper.rb'
 
-shared_examples_for 'a rkhunter::config' do |content|
-
-  it { is_expected.to compile.with_all_deps }
-  it { is_expected.to create_class('rkhunter') }
-  it { is_expected.to contain_class('rkhunter::config') }
-  it { is_expected.to contain_file('/etc/rkhunter.conf').with({
-      :ensure       => 'file',
-      :owner        => 'root',
-      :group        => 'root',
-      :mode         => '0640',
-      :content      => content,
-      :validate_cmd => 'PATH=/sbin:/bin:/usr/sbin:/usr/bin rkhunter -C --configfile %'
-      } )
-  }
-end
-
 describe 'rkhunter' do
   context 'supported operating systems' do
     on_supported_os.each do |os, os_facts|
       context "on #{os}" do
         let(:facts) { os_facts }
 
-        context 'with default parameters used by rkhunter::config' do
-          it_should_behave_like 'a rkhunter::config', File.read(File.join(fixtures, 'rkhunter.conf/default'))
+        # config is a private class called by init.
+        #
+        context 'with default parameters' do
+          it { is_expected.to create_exec('propupd').with({
+            :command => 'rkhunter --propupd',
+            :creates => '/var/lib/rkhunter/db/rkhunter.dat',
+            :path    => ['/bin', '/usr/bin']
+          })}
+          it { is_expected.to create_file('/etc/rkhunter.conf').with({
+            :owner => 'root',
+            :group => 'root',
+            :mode  => '0640',
+            :validate_cmd => 'PATH=/sbin:/bin:/usr/sbin:/usr/bin rkhunter -C --configfile %'
+          })}
+
+          expected_content = File.read(File.join(File.dirname(__FILE__),'../files/rkhunter_conf.txt'))
+          it { is_expected.to create_file('/etc/rkhunter.conf').with_content(expected_content) }
         end
-        context 'with default parameters and all optionals set' do
-          let(:hieradata) { 'config' }
-          it_should_behave_like 'a rkhunter::config', File.read(File.join(fixtures, 'rkhunter.conf/full'))
-        end
+
       end
     end
   end
