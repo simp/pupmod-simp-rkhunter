@@ -12,6 +12,10 @@ lookup_options:
     merge:
       strategy: deep
       knockout_prefix: '--'
+  rkhunter::config::user_fileprop_files_dirs:
+    merge:
+      strategy: deep
+      knockout_prefix: '--'
 
 rkhunter::config::allowhiddendir:
   - "/etc/.java"
@@ -52,4 +56,7 @@ rkhunter::config::allowdevfile:
   - "/dev/shm/pulse-shm-*"
   - "/dev/md/md-device-map"
   - "/dev/shm/sem.slapd-*.stats"
+  - "/dev/shm/PostgreSQL.*"
 
+rkhunter::config::user_fileprop_files_dirs:
+  - "/opt/puppetlabs/**/bin/*"
