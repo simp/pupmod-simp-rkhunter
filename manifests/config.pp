@@ -214,10 +214,11 @@ class rkhunter::config (
 ) {
   assert_private()
 
-  exec { 'propupd':
-    command => 'rkhunter --propupd',
-    creates => "${dbdir}/rkhunter.dat",
-    path    => ['/bin', '/usr/bin']
+  # We need to ensure that this happens after everything else has been executed
+  require 'simplib::stages'
+  class { 'rkhunter::propupd':
+    datfile => "${dbdir}/rkhunter.dat",
+    stage   => 'simp_finalize'
   }
 
   if $use_syslog {
