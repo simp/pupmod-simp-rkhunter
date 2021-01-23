@@ -1,6 +1,7 @@
 ALLOWDEVFILE=/dev/shm/pulse-shm-*
 ALLOWDEVFILE=/dev/md/md-device-map
 ALLOWDEVFILE=/dev/shm/sem.slapd-*.stats
+ALLOWDEVFILE=/dev/shm/PostgreSQL.*
 ALLOWHIDDENDIR=/etc/.java
 ALLOWHIDDENDIR=/dev/.udev
 ALLOWHIDDENDIR=/dev/.udevdb
@@ -64,6 +65,7 @@ TMPDIR=/var/lib/rkhunter
 UPDATE_MIRRORS=1
 UPDT_ON_OS_CHANGE=0
 USE_LOCKING=1
+USER_FILEPROP_FILES_DIRS=/opt/puppetlabs/**/bin/*
 USE_SUNSUM=0
 USE_SYSLOG=LOCAL6.NOTICE
 WARN_ON_OS_CHANGE=1

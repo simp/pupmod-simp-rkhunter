@@ -14,6 +14,8 @@
 #   In module data
 # @param allowhiddenfile
 #   In module data
+# @param user_fileprop_files_dirs
+#   In module data
 # @param allowipcpid
 # @param allowipcproc
 # @param allowipcuser
@@ -102,7 +104,6 @@
 # @param update_mirrors
 # @param updt_on_os_change
 # @param use_locking
-# @param user_fileprop_files_dirs
 # @param use_sunsum
 # @param syslog_priority
 # @param use_syslog
@@ -119,6 +120,7 @@ class rkhunter::config (
   Array[Stdlib::Unixpath]             $allowhiddendir,
   Array[Stdlib::Unixpath]             $allowhiddenfile,
   Array[Stdlib::Unixpath]             $allowdevfile,
+  Array[Stdlib::Unixpath]             $user_fileprop_files_dirs,
   Optional[Array[Stdlib::Unixpath]]   $scriptwhitelist                  = undef,
   Optional[Array[Integer[1]]]         $allowipcpid                      = undef,
   Optional[Array[Stdlib::Unixpath]]   $allowipcproc                     = undef,
@@ -200,7 +202,6 @@ class rkhunter::config (
   Boolean                             $update_mirrors                   = true,
   Boolean                             $updt_on_os_change                = false,
   Boolean                             $use_locking                      = true,
-  Optional[Array[Stdlib::Unixpath]]   $user_fileprop_files_dirs         = undef,
   Boolean                             $use_sunsum                       = false,
   Simplib::Syslog::Priority           $syslog_priority                  = 'LOCAL6.NOTICE',
   Boolean                             $use_syslog                       = true,
@@ -213,10 +214,11 @@ class rkhunter::config (
 ) {
   assert_private()
 
-  exec { 'propupd':
-    command => 'rkhunter --propupd',
-    creates => "${dbdir}/rkhunter.dat",
-    path    => ['/bin', '/usr/bin']
+  # We need to ensure that this happens after everything else has been executed
+  require 'simplib::stages'
+  class { 'rkhunter::propupd':
+    datfile => "${dbdir}/rkhunter.dat",
+    stage   => 'simp_finalize'
   }
 
   if $use_syslog {
