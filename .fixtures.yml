@@ -6,5 +6,6 @@ fixtures:
       puppet_version: '>= 6.0.0'
     stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
     simplib: https://github.com/simp/pupmod-simp-simplib.git
+    systemd: https://github.com/simp/puppet-systemd
   symlinks:
     rkhunter: "#{source_dir}"

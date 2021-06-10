@@ -325,15 +325,6 @@ pup-lint:
 # Unit Tests
 #-----------------------------------------------------------------------
 
-pup5.x-unit:
-  <<: *pup_5_x
-  <<: *unit_tests
-  <<: *with_SIMP_SPEC_MATRIX_LEVEL_2
-
-pup5.pe-unit:
-  <<: *pup_5_pe
-  <<: *unit_tests
-
 pup6.x-unit:
   <<: *pup_6_x
   <<: *unit_tests
@@ -357,29 +348,17 @@ pup7.x-unit:
 # Repo-specific content
 # ==============================================================================
 
-pup5.x:
-  <<: *pup_5_x
-  <<: *acceptance_base
-  script:
-    - 'bundle exec rake beaker:suites[default,default]'
-
 pup6.x:
   <<: *pup_6_x
   <<: *acceptance_base
   script:
-    - 'bundle exec rake beaker:suites[default,default]'
+    - 'bundle exec rake beaker:suites[default]'
 
-pup6.pe:
-  <<: *pup_6_pe
+pup6.x-fips:
+  <<: *pup_6_x
   <<: *acceptance_base
   script:
-    - 'bundle exec rake beaker:suites[default,default]'
-
-pup6.pe-fips:
-  <<: *pup_6_pe
-  <<: *acceptance_base
-  script:
-    - 'BEAKER_fips=yes bundle exec rake beaker:suites[default,default]'
+    - 'BEAKER_fips=yes bundle exec rake beaker:suites[default]'
 
 pup6.pe-oel:
   <<: *pup_6_pe
@@ -387,8 +366,22 @@ pup6.pe-oel:
   script:
     - 'bundle exec rake beaker:suites[default,oel]'
 
-pup7.x:
+pup7:
   <<: *pup_7_x
   <<: *acceptance_base
   script:
     - 'bundle exec rake beaker:suites[default,default]'
+
+pup7-fips:
+  <<: *pup_7_x
+  <<: *acceptance_base
+  <<: *with_SIMP_ACCEPTANCE_MATRIX_LEVEL_2
+  script:
+    - 'BEAKER_fips=yes bundle exec rake beaker:suites[default,default]'
+
+pup7-oel:
+  <<: *pup_7_x
+  <<: *acceptance_base
+  <<: *with_SIMP_ACCEPTANCE_MATRIX_LEVEL_2
+  script:
+    - 'bundle exec rake beaker:suites[default,oel]'

@@ -33,8 +33,4 @@ class rkhunter (
     include 'rkhunter::check'
     Class['rkhunter::config'] -> Class['rkhunter::check']
   }
-
-  if $check_for_updates and $enable_system_check {
-    Class['rkhunter::update'] -> Class['rkhunter::check']
-  }
 }
