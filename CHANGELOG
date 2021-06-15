@@ -1,3 +1,9 @@
+* Tue Jun 15 2021 Trevor Vaughan <tvaughan@onyxpoint.com> - 0.1.0
+- Dropped puppet 5 support
+- Bumped supported version of puppetlabs/stdlib
+- Changed minute for scheduled tasks to a random number to reduce I/O load
+- Updated to use systemd timers instead of cron by default
+
 * Thu Jan 21 2021 Trevor Vaughan <tvaughan@onyxpoint.com> - 0.0.4
 - Added Puppet 7 support
 - Added default user_fileprop_files_dirs to cover the puppet apps

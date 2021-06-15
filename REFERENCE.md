@@ -7,10 +7,11 @@
 ### Classes
 
 * [`rkhunter`](#rkhunter): Installs rkhunter and sets up cron job to run rkhunter once per day
-* [`rkhunter::check`](#rkhuntercheck): Sets a cron job for rkhunter to check the system
+* [`rkhunter::check`](#rkhuntercheck): Add a scheduled job to check the system with rkhunter
 * [`rkhunter::config`](#rkhunterconfig): Configure rkhunter
 * [`rkhunter::install`](#rkhunterinstall): Install rkhunter
-* [`rkhunter::update`](#rkhunterupdate): Add a cron job to check for rkhunter updates
+* [`rkhunter::propupd`](#rkhunterpropupd): Immediately update the properties database
+* [`rkhunter::update`](#rkhunterupdate): Add a scheduled job to update rkhunter
 
 ### Data types
 
@@ -18,15 +19,19 @@
 
 ## Classes
 
-### `rkhunter`
+### <a name="rkhunter"></a>`rkhunter`
 
 Installs rkhunter and sets up cron job to run rkhunter once per day
 
 #### Parameters
 
-The following parameters are available in the `rkhunter` class.
+The following parameters are available in the `rkhunter` class:
 
-##### `check_for_updates`
+* [`check_for_updates`](#check_for_updates)
+* [`enable_system_check`](#enable_system_check)
+* [`install_optional_packages`](#install_optional_packages)
+
+##### <a name="check_for_updates"></a>`check_for_updates`
 
 Data type: `Boolean`
 
@@ -34,7 +39,7 @@ Check internet for definition updates
 
 Default value: ``false``
 
-##### `enable_system_check`
+##### <a name="enable_system_check"></a>`enable_system_check`
 
 Data type: `Boolean`
 
@@ -42,7 +47,7 @@ Set rkhunter to check the system on a regular basis
 
 Default value: ``true``
 
-##### `install_optional_packages`
+##### <a name="install_optional_packages"></a>`install_optional_packages`
 
 Data type: `Boolean`
 
@@ -50,31 +55,60 @@ Install packages that enhance the capabilities of rkhunter
 
 Default value: ``true``
 
-### `rkhunter::check`
+### <a name="rkhuntercheck"></a>`rkhunter::check`
 
-Sets a cron job for rkhunter to check the system
+Add a scheduled job to check the system with rkhunter
 
 #### Parameters
 
-The following parameters are available in the `rkhunter::check` class.
+The following parameters are available in the `rkhunter::check` class:
 
-##### `minute`
+* [`method`](#method)
+* [`systemd_calendar`](#systemd_calendar)
+* [`minute`](#minute)
+* [`hour`](#hour)
+* [`monthday`](#monthday)
+* [`month`](#month)
+* [`weekday`](#weekday)
+* [`path`](#path)
+* [`options`](#options)
+
+##### <a name="method"></a>`method`
+
+Data type: `Enum['cron','systemd']`
+
+How you wish to schedule the run
+
+Default value: `'systemd'`
+
+##### <a name="systemd_calendar"></a>`systemd_calendar`
+
+Data type: `Optional[String[1]]`
+
+If `$method` is `systemd`, set this exact calendar string
+
+This is not verified, use `systemd-analyze calendar` on a modern system to
+ensure that you have a valid string
+
+Default value: ``undef``
+
+##### <a name="minute"></a>`minute`
 
 Data type: `Simplib::Cron::Minute`
 
 Cron minute
 
-Default value: `25`
+Default value: `fqdn_rand(59)`
 
-##### `hour`
+##### <a name="hour"></a>`hour`
 
 Data type: `Simplib::Cron::Hour`
 
 Cron hour
 
-Default value: `0`
+Default value: `1`
 
-##### `monthday`
+##### <a name="monthday"></a>`monthday`
 
 Data type: `Simplib::Cron::MonthDay`
 
@@ -82,7 +116,7 @@ Cron monthday
 
 Default value: `'*'`
 
-##### `month`
+##### <a name="month"></a>`month`
 
 Data type: `Simplib::Cron::Month`
 
@@ -90,7 +124,7 @@ Cron month
 
 Default value: `'*'`
 
-##### `weekday`
+##### <a name="weekday"></a>`weekday`
 
 Data type: `Simplib::Cron::Weekday`
 
@@ -98,15 +132,23 @@ Cron weekday
 
 Default value: `'*'`
 
-##### `options`
+##### <a name="path"></a>`path`
+
+Data type: `Stdlib::Unixpath`
+
+The path to rkhunter
+
+Default value: `'/usr/bin/rkhunter'`
+
+##### <a name="options"></a>`options`
 
 Data type: `Array[String[1]]`
 
-Options to pass to ``rkhunter --check``
+Extra options to pass to `rkhunter --check`
 
-Default value: `[ '--skip-keypress', '--quiet' ]`
+Default value: `['--skip-keypress', '--quiet']`
 
-### `rkhunter::config`
+### <a name="rkhunterconfig"></a>`rkhunter::config`
 
 Any parameter that is not documented below matches its direct counterpart in
 the `rkhunter.conf` configuration file.
@@ -118,33 +160,128 @@ here relate to either performance or system security safety.
 
 #### Parameters
 
-The following parameters are available in the `rkhunter::config` class.
+The following parameters are available in the `rkhunter::config` class:
 
-##### `allowdevfile`
+* [`allowdevfile`](#allowdevfile)
+* [`allowhiddendir`](#allowhiddendir)
+* [`allowhiddenfile`](#allowhiddenfile)
+* [`user_fileprop_files_dirs`](#user_fileprop_files_dirs)
+* [`allowipcpid`](#allowipcpid)
+* [`allowipcproc`](#allowipcproc)
+* [`allowipcuser`](#allowipcuser)
+* [`allowprocdelfile`](#allowprocdelfile)
+* [`allowproclisten`](#allowproclisten)
+* [`allowpromiscif`](#allowpromiscif)
+* [`allow_ssh_prot_v1`](#allow_ssh_prot_v1)
+* [`allow_ssh_root_user`](#allow_ssh_root_user)
+* [`allow_syslog_remote_logging`](#allow_syslog_remote_logging)
+* [`append_log`](#append_log)
+* [`app_whitelist`](#app_whitelist)
+* [`attrwhitelist`](#attrwhitelist)
+* [`auto_x_detect`](#auto_x_detect)
+* [`bindir`](#bindir)
+* [`color_set2`](#color_set2)
+* [`copy_log_on_error`](#copy_log_on_error)
+* [`dbdir`](#dbdir)
+* [`disable_tests`](#disable_tests)
+* [`empty_logfiles`](#empty_logfiles)
+* [`enable_tests`](#enable_tests)
+* [`epoch_date_cmd`](#epoch_date_cmd)
+* [`exclude_user_fileprop_files_dirs`](#exclude_user_fileprop_files_dirs)
+* [`existwhitelist`](#existwhitelist)
+* [`globstar`](#globstar)
+* [`hash_cmd`](#hash_cmd)
+* [`hash_fld_idx`](#hash_fld_idx)
+* [`ignore_prelink_dep_err`](#ignore_prelink_dep_err)
+* [`immutable_set`](#immutable_set)
+* [`immutwhitelist`](#immutwhitelist)
+* [`inetd_allowed_svc`](#inetd_allowed_svc)
+* [`inetd_conf_path`](#inetd_conf_path)
+* [`installdir`](#installdir)
+* [`ipc_seg_size`](#ipc_seg_size)
+* [`language`](#language)
+* [`lock_timeout`](#lock_timeout)
+* [`lockdir`](#lockdir)
+* [`logfile`](#logfile)
+* [`mail_on_warning`](#mail_on_warning)
+* [`mail_cmd`](#mail_cmd)
+* [`mirrors_mode`](#mirrors_mode)
+* [`missing_logfiles`](#missing_logfiles)
+* [`modules_dir`](#modules_dir)
+* [`os_version_file`](#os_version_file)
+* [`password_file`](#password_file)
+* [`phalanx2_dirtest`](#phalanx2_dirtest)
+* [`pkgmgr_no_vrfy`](#pkgmgr_no_vrfy)
+* [`pkgmgr`](#pkgmgr)
+* [`port_path_whitelist`](#port_path_whitelist)
+* [`tcp_port_whitelist`](#tcp_port_whitelist)
+* [`udp_port_whitelist`](#udp_port_whitelist)
+* [`pwdless_accounts`](#pwdless_accounts)
+* [`readlink_cmd`](#readlink_cmd)
+* [`rotate_mirrors`](#rotate_mirrors)
+* [`rtkt_dir_whitelist`](#rtkt_dir_whitelist)
+* [`rtkt_file_whitelist`](#rtkt_file_whitelist)
+* [`scan_mode_dev`](#scan_mode_dev)
+* [`scanrootkitmode`](#scanrootkitmode)
+* [`scriptdir`](#scriptdir)
+* [`scriptwhitelist`](#scriptwhitelist)
+* [`shared_lib_whitelist`](#shared_lib_whitelist)
+* [`show_lock_msgs`](#show_lock_msgs)
+* [`show_summary_time`](#show_summary_time)
+* [`show_summary_warnings_number`](#show_summary_warnings_number)
+* [`skip_inode_check`](#skip_inode_check)
+* [`ssh_config_dir`](#ssh_config_dir)
+* [`startup_paths`](#startup_paths)
+* [`stat_cmd`](#stat_cmd)
+* [`suspscan_dirs`](#suspscan_dirs)
+* [`suspscan_maxsize`](#suspscan_maxsize)
+* [`suspscan_temp`](#suspscan_temp)
+* [`suspscan_thresh`](#suspscan_thresh)
+* [`suspscan_whitelist`](#suspscan_whitelist)
+* [`syslog_config_file`](#syslog_config_file)
+* [`tmpdir`](#tmpdir)
+* [`uid0_accounts`](#uid0_accounts)
+* [`unhide_tests`](#unhide_tests)
+* [`unhidetcp_opts`](#unhidetcp_opts)
+* [`update_lang`](#update_lang)
+* [`update_mirrors`](#update_mirrors)
+* [`updt_on_os_change`](#updt_on_os_change)
+* [`use_locking`](#use_locking)
+* [`use_sunsum`](#use_sunsum)
+* [`syslog_priority`](#syslog_priority)
+* [`use_syslog`](#use_syslog)
+* [`warn_on_os_change`](#warn_on_os_change)
+* [`web_cmd`](#web_cmd)
+* [`whitelisted_is_white`](#whitelisted_is_white)
+* [`writewhitelist`](#writewhitelist)
+* [`xinetd_allowed_svc`](#xinetd_allowed_svc)
+* [`xinetd_conf_path`](#xinetd_conf_path)
+
+##### <a name="allowdevfile"></a>`allowdevfile`
 
 Data type: `Array[Stdlib::Unixpath]`
 
 In module data
 
-##### `allowhiddendir`
+##### <a name="allowhiddendir"></a>`allowhiddendir`
 
 Data type: `Array[Stdlib::Unixpath]`
 
 In module data
 
-##### `allowhiddenfile`
+##### <a name="allowhiddenfile"></a>`allowhiddenfile`
 
 Data type: `Array[Stdlib::Unixpath]`
 
 In module data
 
-##### `user_fileprop_files_dirs`
+##### <a name="user_fileprop_files_dirs"></a>`user_fileprop_files_dirs`
 
 Data type: `Array[Stdlib::Unixpath]`
 
 In module data
 
-##### `allowipcpid`
+##### <a name="allowipcpid"></a>`allowipcpid`
 
 Data type: `Optional[Array[Integer[1]]]`
 
@@ -152,7 +289,7 @@ Data type: `Optional[Array[Integer[1]]]`
 
 Default value: ``undef``
 
-##### `allowipcproc`
+##### <a name="allowipcproc"></a>`allowipcproc`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -160,7 +297,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `allowipcuser`
+##### <a name="allowipcuser"></a>`allowipcuser`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -168,7 +305,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `allowprocdelfile`
+##### <a name="allowprocdelfile"></a>`allowprocdelfile`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -176,7 +313,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `allowproclisten`
+##### <a name="allowproclisten"></a>`allowproclisten`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -184,7 +321,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `allowpromiscif`
+##### <a name="allowpromiscif"></a>`allowpromiscif`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -192,7 +329,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `allow_ssh_prot_v1`
+##### <a name="allow_ssh_prot_v1"></a>`allow_ssh_prot_v1`
 
 Data type: `Boolean`
 
@@ -200,7 +337,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `allow_ssh_root_user`
+##### <a name="allow_ssh_root_user"></a>`allow_ssh_root_user`
 
 Data type: `Variant[Boolean,Enum['unset']]`
 
@@ -208,7 +345,7 @@ Data type: `Variant[Boolean,Enum['unset']]`
 
 Default value: ``false``
 
-##### `allow_syslog_remote_logging`
+##### <a name="allow_syslog_remote_logging"></a>`allow_syslog_remote_logging`
 
 Data type: `Boolean`
 
@@ -216,7 +353,7 @@ Data type: `Boolean`
 
 Default value: ``true``
 
-##### `append_log`
+##### <a name="append_log"></a>`append_log`
 
 Data type: `Boolean`
 
@@ -224,7 +361,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `app_whitelist`
+##### <a name="app_whitelist"></a>`app_whitelist`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -232,7 +369,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `attrwhitelist`
+##### <a name="attrwhitelist"></a>`attrwhitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -240,7 +377,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `auto_x_detect`
+##### <a name="auto_x_detect"></a>`auto_x_detect`
 
 Data type: `Boolean`
 
@@ -248,7 +385,7 @@ Data type: `Boolean`
 
 Default value: ``true``
 
-##### `bindir`
+##### <a name="bindir"></a>`bindir`
 
 Data type: `Optional[Array[Rkhunter::BindPath]]`
 
@@ -256,7 +393,7 @@ Data type: `Optional[Array[Rkhunter::BindPath]]`
 
 Default value: ``undef``
 
-##### `color_set2`
+##### <a name="color_set2"></a>`color_set2`
 
 Data type: `Boolean`
 
@@ -264,7 +401,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `copy_log_on_error`
+##### <a name="copy_log_on_error"></a>`copy_log_on_error`
 
 Data type: `Boolean`
 
@@ -272,7 +409,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `dbdir`
+##### <a name="dbdir"></a>`dbdir`
 
 Data type: `Stdlib::Unixpath`
 
@@ -280,7 +417,7 @@ Data type: `Stdlib::Unixpath`
 
 Default value: `'/var/lib/rkhunter/db'`
 
-##### `disable_tests`
+##### <a name="disable_tests"></a>`disable_tests`
 
 Data type: `Array[String]`
 
@@ -290,7 +427,7 @@ nature and the fact they are prone to false positives.
 
 Default value: `['suspscan', 'hidden_ports', 'hidden_procs', 'deleted_files', 'packet_cap_apps', 'apps']`
 
-##### `empty_logfiles`
+##### <a name="empty_logfiles"></a>`empty_logfiles`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -298,7 +435,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `enable_tests`
+##### <a name="enable_tests"></a>`enable_tests`
 
 Data type: `Array[String[1]]`
 
@@ -306,7 +443,7 @@ Data type: `Array[String[1]]`
 
 Default value: `['ALL']`
 
-##### `epoch_date_cmd`
+##### <a name="epoch_date_cmd"></a>`epoch_date_cmd`
 
 Data type: `Optional[String[1]]`
 
@@ -314,7 +451,7 @@ Data type: `Optional[String[1]]`
 
 Default value: ``undef``
 
-##### `exclude_user_fileprop_files_dirs`
+##### <a name="exclude_user_fileprop_files_dirs"></a>`exclude_user_fileprop_files_dirs`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -322,7 +459,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `existwhitelist`
+##### <a name="existwhitelist"></a>`existwhitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -330,7 +467,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `globstar`
+##### <a name="globstar"></a>`globstar`
 
 Data type: `Boolean`
 
@@ -338,7 +475,7 @@ Data type: `Boolean`
 
 Default value: ``true``
 
-##### `hash_cmd`
+##### <a name="hash_cmd"></a>`hash_cmd`
 
 Data type: `Optional[String[1]]`
 
@@ -346,7 +483,7 @@ Data type: `Optional[String[1]]`
 
 Default value: ``undef``
 
-##### `hash_fld_idx`
+##### <a name="hash_fld_idx"></a>`hash_fld_idx`
 
 Data type: `Optional[Integer[1]]`
 
@@ -354,7 +491,7 @@ Data type: `Optional[Integer[1]]`
 
 Default value: ``undef``
 
-##### `ignore_prelink_dep_err`
+##### <a name="ignore_prelink_dep_err"></a>`ignore_prelink_dep_err`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -362,7 +499,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `immutable_set`
+##### <a name="immutable_set"></a>`immutable_set`
 
 Data type: `Boolean`
 
@@ -370,7 +507,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `immutwhitelist`
+##### <a name="immutwhitelist"></a>`immutwhitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -378,7 +515,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `inetd_allowed_svc`
+##### <a name="inetd_allowed_svc"></a>`inetd_allowed_svc`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -386,7 +523,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `inetd_conf_path`
+##### <a name="inetd_conf_path"></a>`inetd_conf_path`
 
 Data type: `Optional[Stdlib::Unixpath]`
 
@@ -394,7 +531,7 @@ Data type: `Optional[Stdlib::Unixpath]`
 
 Default value: ``undef``
 
-##### `installdir`
+##### <a name="installdir"></a>`installdir`
 
 Data type: `Stdlib::Unixpath`
 
@@ -402,7 +539,7 @@ Data type: `Stdlib::Unixpath`
 
 Default value: `'/usr'`
 
-##### `ipc_seg_size`
+##### <a name="ipc_seg_size"></a>`ipc_seg_size`
 
 Data type: `Optional[Integer[1]]`
 
@@ -410,7 +547,7 @@ Data type: `Optional[Integer[1]]`
 
 Default value: ``undef``
 
-##### `language`
+##### <a name="language"></a>`language`
 
 Data type: `Optional[String[1]]`
 
@@ -418,7 +555,7 @@ Data type: `Optional[String[1]]`
 
 Default value: ``undef``
 
-##### `lock_timeout`
+##### <a name="lock_timeout"></a>`lock_timeout`
 
 Data type: `Optional[Integer[1]]`
 
@@ -426,7 +563,7 @@ Data type: `Optional[Integer[1]]`
 
 Default value: ``undef``
 
-##### `lockdir`
+##### <a name="lockdir"></a>`lockdir`
 
 Data type: `Stdlib::Unixpath`
 
@@ -434,7 +571,7 @@ Data type: `Stdlib::Unixpath`
 
 Default value: `'/var/run/lock'`
 
-##### `logfile`
+##### <a name="logfile"></a>`logfile`
 
 Data type: `Stdlib::Unixpath`
 
@@ -442,7 +579,7 @@ Data type: `Stdlib::Unixpath`
 
 Default value: `'/var/log/rkhunter/rkhunter.log'`
 
-##### `mail_on_warning`
+##### <a name="mail_on_warning"></a>`mail_on_warning`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -450,7 +587,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `mail_cmd`
+##### <a name="mail_cmd"></a>`mail_cmd`
 
 Data type: `String[1]`
 
@@ -458,7 +595,7 @@ Data type: `String[1]`
 
 Default value: `'mail -s "[rkhunter] Warnings found for ${HOST_NAME}"'`
 
-##### `mirrors_mode`
+##### <a name="mirrors_mode"></a>`mirrors_mode`
 
 Data type: `Enum['any','local','remote']`
 
@@ -466,7 +603,7 @@ Data type: `Enum['any','local','remote']`
 
 Default value: `'any'`
 
-##### `missing_logfiles`
+##### <a name="missing_logfiles"></a>`missing_logfiles`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -474,7 +611,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `modules_dir`
+##### <a name="modules_dir"></a>`modules_dir`
 
 Data type: `Optional[Stdlib::Unixpath]`
 
@@ -482,7 +619,7 @@ Data type: `Optional[Stdlib::Unixpath]`
 
 Default value: ``undef``
 
-##### `os_version_file`
+##### <a name="os_version_file"></a>`os_version_file`
 
 Data type: `Optional[Stdlib::Unixpath]`
 
@@ -490,7 +627,7 @@ Data type: `Optional[Stdlib::Unixpath]`
 
 Default value: ``undef``
 
-##### `password_file`
+##### <a name="password_file"></a>`password_file`
 
 Data type: `Optional[Stdlib::Unixpath]`
 
@@ -498,7 +635,7 @@ Data type: `Optional[Stdlib::Unixpath]`
 
 Default value: ``undef``
 
-##### `phalanx2_dirtest`
+##### <a name="phalanx2_dirtest"></a>`phalanx2_dirtest`
 
 Data type: `Boolean`
 
@@ -506,7 +643,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `pkgmgr_no_vrfy`
+##### <a name="pkgmgr_no_vrfy"></a>`pkgmgr_no_vrfy`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -514,7 +651,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `pkgmgr`
+##### <a name="pkgmgr"></a>`pkgmgr`
 
 Data type: `String[1]`
 
@@ -522,7 +659,7 @@ Data type: `String[1]`
 
 Default value: `'RPM'`
 
-##### `port_path_whitelist`
+##### <a name="port_path_whitelist"></a>`port_path_whitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -530,7 +667,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `tcp_port_whitelist`
+##### <a name="tcp_port_whitelist"></a>`tcp_port_whitelist`
 
 Data type: `Optional[Array[Simplib::Port]]`
 
@@ -538,7 +675,7 @@ TCP Ports to add to the PORT_WHITELIST option
 
 Default value: ``undef``
 
-##### `udp_port_whitelist`
+##### <a name="udp_port_whitelist"></a>`udp_port_whitelist`
 
 Data type: `Optional[Array[Simplib::Port]]`
 
@@ -546,7 +683,7 @@ UDP Ports to add to the PORT_WHITELIST option
 
 Default value: ``undef``
 
-##### `pwdless_accounts`
+##### <a name="pwdless_accounts"></a>`pwdless_accounts`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -554,7 +691,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `readlink_cmd`
+##### <a name="readlink_cmd"></a>`readlink_cmd`
 
 Data type: `Optional[String[1]]`
 
@@ -562,7 +699,7 @@ Data type: `Optional[String[1]]`
 
 Default value: ``undef``
 
-##### `rotate_mirrors`
+##### <a name="rotate_mirrors"></a>`rotate_mirrors`
 
 Data type: `Boolean`
 
@@ -570,7 +707,7 @@ Data type: `Boolean`
 
 Default value: ``true``
 
-##### `rtkt_dir_whitelist`
+##### <a name="rtkt_dir_whitelist"></a>`rtkt_dir_whitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -578,7 +715,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `rtkt_file_whitelist`
+##### <a name="rtkt_file_whitelist"></a>`rtkt_file_whitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -586,7 +723,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `scan_mode_dev`
+##### <a name="scan_mode_dev"></a>`scan_mode_dev`
 
 Data type: `Enum['THOROUGH','LAZY']`
 
@@ -594,7 +731,7 @@ Data type: `Enum['THOROUGH','LAZY']`
 
 Default value: `'THOROUGH'`
 
-##### `scanrootkitmode`
+##### <a name="scanrootkitmode"></a>`scanrootkitmode`
 
 Data type: `Boolean`
 
@@ -603,7 +740,7 @@ can do to your system performance!
 
 Default value: ``false``
 
-##### `scriptdir`
+##### <a name="scriptdir"></a>`scriptdir`
 
 Data type: `Stdlib::Unixpath`
 
@@ -611,7 +748,7 @@ Data type: `Stdlib::Unixpath`
 
 Default value: `'/usr/share/rkhunter/scripts'`
 
-##### `scriptwhitelist`
+##### <a name="scriptwhitelist"></a>`scriptwhitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -619,7 +756,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `shared_lib_whitelist`
+##### <a name="shared_lib_whitelist"></a>`shared_lib_whitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -627,7 +764,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `show_lock_msgs`
+##### <a name="show_lock_msgs"></a>`show_lock_msgs`
 
 Data type: `Boolean`
 
@@ -635,7 +772,7 @@ Data type: `Boolean`
 
 Default value: ``true``
 
-##### `show_summary_time`
+##### <a name="show_summary_time"></a>`show_summary_time`
 
 Data type: `Integer[0,3]`
 
@@ -643,7 +780,7 @@ Data type: `Integer[0,3]`
 
 Default value: `3`
 
-##### `show_summary_warnings_number`
+##### <a name="show_summary_warnings_number"></a>`show_summary_warnings_number`
 
 Data type: `Boolean`
 
@@ -651,7 +788,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `skip_inode_check`
+##### <a name="skip_inode_check"></a>`skip_inode_check`
 
 Data type: `Boolean`
 
@@ -659,7 +796,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `ssh_config_dir`
+##### <a name="ssh_config_dir"></a>`ssh_config_dir`
 
 Data type: `Optional[Stdlib::Unixpath]`
 
@@ -667,7 +804,7 @@ Data type: `Optional[Stdlib::Unixpath]`
 
 Default value: ``undef``
 
-##### `startup_paths`
+##### <a name="startup_paths"></a>`startup_paths`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -675,7 +812,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `stat_cmd`
+##### <a name="stat_cmd"></a>`stat_cmd`
 
 Data type: `Optional[String[1]]`
 
@@ -683,7 +820,7 @@ Data type: `Optional[String[1]]`
 
 Default value: ``undef``
 
-##### `suspscan_dirs`
+##### <a name="suspscan_dirs"></a>`suspscan_dirs`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -691,7 +828,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `suspscan_maxsize`
+##### <a name="suspscan_maxsize"></a>`suspscan_maxsize`
 
 Data type: `Integer[0]`
 
@@ -699,7 +836,7 @@ Data type: `Integer[0]`
 
 Default value: `1024000`
 
-##### `suspscan_temp`
+##### <a name="suspscan_temp"></a>`suspscan_temp`
 
 Data type: `Stdlib::Unixpath`
 
@@ -707,7 +844,7 @@ Data type: `Stdlib::Unixpath`
 
 Default value: `'/dev/shm'`
 
-##### `suspscan_thresh`
+##### <a name="suspscan_thresh"></a>`suspscan_thresh`
 
 Data type: `Integer[0]`
 
@@ -715,7 +852,7 @@ Data type: `Integer[0]`
 
 Default value: `200`
 
-##### `suspscan_whitelist`
+##### <a name="suspscan_whitelist"></a>`suspscan_whitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -723,7 +860,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `syslog_config_file`
+##### <a name="syslog_config_file"></a>`syslog_config_file`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -731,7 +868,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `tmpdir`
+##### <a name="tmpdir"></a>`tmpdir`
 
 Data type: `Stdlib::Unixpath`
 
@@ -739,7 +876,7 @@ Data type: `Stdlib::Unixpath`
 
 Default value: `'/var/lib/rkhunter'`
 
-##### `uid0_accounts`
+##### <a name="uid0_accounts"></a>`uid0_accounts`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -747,7 +884,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `unhide_tests`
+##### <a name="unhide_tests"></a>`unhide_tests`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -755,7 +892,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `unhidetcp_opts`
+##### <a name="unhidetcp_opts"></a>`unhidetcp_opts`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -763,7 +900,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `update_lang`
+##### <a name="update_lang"></a>`update_lang`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -771,7 +908,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `update_mirrors`
+##### <a name="update_mirrors"></a>`update_mirrors`
 
 Data type: `Boolean`
 
@@ -779,7 +916,7 @@ Data type: `Boolean`
 
 Default value: ``true``
 
-##### `updt_on_os_change`
+##### <a name="updt_on_os_change"></a>`updt_on_os_change`
 
 Data type: `Boolean`
 
@@ -787,7 +924,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `use_locking`
+##### <a name="use_locking"></a>`use_locking`
 
 Data type: `Boolean`
 
@@ -795,7 +932,7 @@ Data type: `Boolean`
 
 Default value: ``true``
 
-##### `use_sunsum`
+##### <a name="use_sunsum"></a>`use_sunsum`
 
 Data type: `Boolean`
 
@@ -803,7 +940,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `syslog_priority`
+##### <a name="syslog_priority"></a>`syslog_priority`
 
 Data type: `Simplib::Syslog::Priority`
 
@@ -811,7 +948,7 @@ Data type: `Simplib::Syslog::Priority`
 
 Default value: `'LOCAL6.NOTICE'`
 
-##### `use_syslog`
+##### <a name="use_syslog"></a>`use_syslog`
 
 Data type: `Boolean`
 
@@ -819,7 +956,7 @@ Data type: `Boolean`
 
 Default value: ``true``
 
-##### `warn_on_os_change`
+##### <a name="warn_on_os_change"></a>`warn_on_os_change`
 
 Data type: `Boolean`
 
@@ -827,7 +964,7 @@ Data type: `Boolean`
 
 Default value: ``true``
 
-##### `web_cmd`
+##### <a name="web_cmd"></a>`web_cmd`
 
 Data type: `Optional[String[1]]`
 
@@ -835,7 +972,7 @@ Data type: `Optional[String[1]]`
 
 Default value: ``undef``
 
-##### `whitelisted_is_white`
+##### <a name="whitelisted_is_white"></a>`whitelisted_is_white`
 
 Data type: `Boolean`
 
@@ -843,7 +980,7 @@ Data type: `Boolean`
 
 Default value: ``false``
 
-##### `writewhitelist`
+##### <a name="writewhitelist"></a>`writewhitelist`
 
 Data type: `Optional[Array[Stdlib::Unixpath]]`
 
@@ -851,7 +988,7 @@ Data type: `Optional[Array[Stdlib::Unixpath]]`
 
 Default value: ``undef``
 
-##### `xinetd_allowed_svc`
+##### <a name="xinetd_allowed_svc"></a>`xinetd_allowed_svc`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -859,7 +996,7 @@ Data type: `Optional[Array[String[1]]]`
 
 Default value: ``undef``
 
-##### `xinetd_conf_path`
+##### <a name="xinetd_conf_path"></a>`xinetd_conf_path`
 
 Data type: `Optional[Stdlib::Unixpath]`
 
@@ -867,15 +1004,20 @@ Data type: `Optional[Stdlib::Unixpath]`
 
 Default value: ``undef``
 
-### `rkhunter::install`
+### <a name="rkhunterinstall"></a>`rkhunter::install`
 
 Install rkhunter
 
 #### Parameters
 
-The following parameters are available in the `rkhunter::install` class.
+The following parameters are available in the `rkhunter::install` class:
 
-##### `install_optional_packages`
+* [`install_optional_packages`](#install_optional_packages)
+* [`optional_packages`](#optional_packages)
+* [`optional_package_ensure`](#optional_package_ensure)
+* [`rkhunter_package_ensure`](#rkhunter_package_ensure)
+
+##### <a name="install_optional_packages"></a>`install_optional_packages`
 
 Data type: `Boolean`
 
@@ -883,7 +1025,7 @@ Install optional packages that enable additional functionality in rkhunter
 
 Default value: `$rkhunter::install_optional_packages`
 
-##### `optional_packages`
+##### <a name="optional_packages"></a>`optional_packages`
 
 Data type: `Optional[Variant[Hash[String[1],Hash],Array[String[1]]]]`
 
@@ -894,7 +1036,7 @@ function accepts
 
 Default value: ``undef``
 
-##### `optional_package_ensure`
+##### <a name="optional_package_ensure"></a>`optional_package_ensure`
 
 Data type: `Simplib::PackageEnsure`
 
@@ -902,7 +1044,7 @@ The state in which to place all packages
 
 Default value: `simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' })`
 
-##### `rkhunter_package_ensure`
+##### <a name="rkhunter_package_ensure"></a>`rkhunter_package_ensure`
 
 Data type: `String[1]`
 
@@ -911,23 +1053,77 @@ pinned.
 
 Default value: `simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' })`
 
-### `rkhunter::update`
+### <a name="rkhunterpropupd"></a>`rkhunter::propupd`
 
-Add a cron job to check for rkhunter updates
+Needed so that each run after installation does not trigger false positives
 
 #### Parameters
 
-The following parameters are available in the `rkhunter::update` class.
+The following parameters are available in the `rkhunter::propupd` class:
 
-##### `minute`
+* [`datfile`](#datfile)
+* [`enable`](#enable)
+
+##### <a name="datfile"></a>`datfile`
+
+Data type: `Stdlib::Unixpath`
+
+
+
+##### <a name="enable"></a>`enable`
+
+Data type: `Boolean`
+
+
+
+Default value: ``true``
+
+### <a name="rkhunterupdate"></a>`rkhunter::update`
+
+Add a scheduled job to update rkhunter
+
+#### Parameters
+
+The following parameters are available in the `rkhunter::update` class:
+
+* [`method`](#method)
+* [`systemd_calendar`](#systemd_calendar)
+* [`minute`](#minute)
+* [`hour`](#hour)
+* [`monthday`](#monthday)
+* [`month`](#month)
+* [`weekday`](#weekday)
+* [`options`](#options)
+* [`path`](#path)
+
+##### <a name="method"></a>`method`
+
+Data type: `Enum['cron','systemd']`
+
+How you wish to schedule the run
+
+Default value: `'systemd'`
+
+##### <a name="systemd_calendar"></a>`systemd_calendar`
+
+Data type: `Optional[String[1]]`
+
+If `$method` is `systemd`, set this exact calendar string
+
+This is not verified, use `systemd-analyze calendar` on a modern system to
+ensure that you have a valid string
+
+Default value: ``undef``
+
+##### <a name="minute"></a>`minute`
 
 Data type: `Simplib::Cron::Minute`
 
 Cron minute
 
-Default value: `5`
+Default value: `fqdn_rand(59)`
 
-##### `hour`
+##### <a name="hour"></a>`hour`
 
 Data type: `Simplib::Cron::Hour`
 
@@ -935,7 +1131,7 @@ Cron hour
 
 Default value: `0`
 
-##### `monthday`
+##### <a name="monthday"></a>`monthday`
 
 Data type: `Simplib::Cron::MonthDay`
 
@@ -943,7 +1139,7 @@ Cron monthday
 
 Default value: `'*'`
 
-##### `month`
+##### <a name="month"></a>`month`
 
 Data type: `Simplib::Cron::Month`
 
@@ -951,7 +1147,7 @@ Cron month
 
 Default value: `'*'`
 
-##### `weekday`
+##### <a name="weekday"></a>`weekday`
 
 Data type: `Simplib::Cron::Weekday`
 
@@ -959,21 +1155,33 @@ Cron weekday
 
 Default value: `'*'`
 
-##### `options`
+##### <a name="options"></a>`options`
 
 Data type: `Array[String[1]]`
 
-Extra options to pass to ``rkhunter --update``
+Extra options to pass to `rkhunter --update`
 
 Default value: `['--nocolors']`
 
+##### <a name="path"></a>`path`
+
+Data type: `Stdlib::Unixpath`
+
+
+
+Default value: `'/usr/bin/rkhunter'`
+
 ## Data types
 
-### `Rkhunter::BindPath`
+### <a name="rkhunterbindpath"></a>`Rkhunter::BindPath`
 
 matches valid binddir path
 accepts absolute path or an absolute path
 with a '+' proceeding it
 
-Alias of `Pattern['^(?:\/|\+\/)(?:[^\/\0]+\/*)*$']`
+Alias of
+
+```puppet
+Pattern['^(?:\/|\+\/)(?:[^\/\0]+\/*)*$']
+```
 
