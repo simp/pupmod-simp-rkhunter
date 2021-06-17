@@ -1,3 +1,6 @@
+* Wed Jun 16 2021 Chris Tessmer <chris.tessmer@onyxpoint.com> - 0.1.0
+- Ensured support for Puppet 7 in requirements and stdlib
+
 * Tue Jun 15 2021 Trevor Vaughan <tvaughan@onyxpoint.com> - 0.1.0
 - Dropped puppet 5 support
 - Bumped supported version of puppetlabs/stdlib
