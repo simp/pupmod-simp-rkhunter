@@ -1,6 +1,6 @@
 {
   "name": "simp-rkhunter",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "author": "SIMP Team",
   "summary": "A SIMP puppet module for managing rkhunter",
   "license": "Apache-2.0",
