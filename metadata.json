@@ -1,6 +1,6 @@
 {
   "name": "simp-rkhunter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "SIMP Team",
   "summary": "A SIMP puppet module for managing rkhunter",
   "license": "Apache-2.0",
@@ -13,7 +13,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 6.6.0 < 8.0.0"
+      "version_requirement": ">= 8.0.0 < 9.0.0"
     },
     {
       "name": "simp/simplib",
@@ -39,6 +39,12 @@
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
         "7",
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "Rocky",
+      "operatingsystemrelease": [
         "8"
       ]
     }
