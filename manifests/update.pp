@@ -58,7 +58,7 @@ class rkhunter::update (
 
   $_timer = @("EOM")
   [Timer]
-  OnCalendar=$_systemd_calendar
+  OnCalendar=${_systemd_calendar}
   | EOM
 
   $_service = @("EOM")
