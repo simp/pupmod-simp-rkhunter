@@ -1,6 +1,3 @@
 ---
-rkhunter::install_optional_packages: true
-  
-rkhunter::install::optional_packages:
-  - unhide
+rkhunter::install_optional_packages: false
 
