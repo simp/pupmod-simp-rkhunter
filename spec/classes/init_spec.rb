@@ -27,7 +27,7 @@ describe 'rkhunter' do
           let(:params) do
             {
               check_for_updates: true,
-           install_optional_packages: false
+              install_optional_packages: false,
             }
           end
 
