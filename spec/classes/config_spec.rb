@@ -9,7 +9,7 @@ describe 'rkhunter' do
         # config is a private class called by init.
         #
         context 'with default parameters' do
-          it { is_expected.to create_class('Rkhunter::Propupd').with_stage('simp_finalize')}
+          it { is_expected.to create_class('Rkhunter::Propupd').with_stage('simp_finalize') }
 
           it {
             is_expected.to create_exec('rkhunter_propupd')
@@ -26,10 +26,9 @@ describe 'rkhunter' do
               .with_validate_cmd('PATH=/sbin:/bin:/usr/sbin:/usr/bin rkhunter -C --configfile %')
           }
 
-          expected_content = File.read(File.join(File.dirname(__FILE__),'../files/rkhunter_conf.txt'))
+          expected_content = File.read(File.join(File.dirname(__FILE__), '../files/rkhunter_conf.txt'))
           it { is_expected.to create_file('/etc/rkhunter.conf').with_content(expected_content) }
         end
-
       end
     end
   end

@@ -17,24 +17,24 @@ describe 'rkhunter' do
           it { is_expected.to create_package('rkhunter') }
 
           if os_facts[:os][:release][:major].to_i >= 8
-            it { is_expected.to_not create_package('unhide') }
+            it { is_expected.not_to create_package('unhide') }
           else
             it { is_expected.to create_package('unhide') }
           end
-
         end
 
         context 'when checking for updates' do
-          let(:params) {{
-            :check_for_updates => true,
-            :install_optional_packages => false
-          }}
+          let(:params) do
+            {
+              check_for_updates: true,
+              install_optional_packages: false,
+            }
+          end
 
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to create_class('rkhunter::update').that_requires('Class[rkhunter::config]') }
-          it { is_expected.to_not create_package('unhide') }
+          it { is_expected.not_to create_package('unhide') }
         end
-
       end
     end
   end
